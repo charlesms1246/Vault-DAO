@@ -66,7 +66,7 @@ export function useTreasury(treasuryAddresses: `0x${string}`[], chainId: number 
                 abi: ERC20_ABI,
                 functionName: 'balanceOf',
                 args: [address],
-              });
+              } as any) as bigint;
 
               if (balance > 0n) {
                 const formattedBalance = formatTokenBalance(balance, token.decimals);

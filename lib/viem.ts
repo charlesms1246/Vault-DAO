@@ -1,8 +1,8 @@
-import { createPublicClient, http, PublicClient } from 'viem';
+import { createPublicClient, http } from 'viem';
 import { mainnet, arbitrum, optimism, base, polygon } from 'viem/chains';
 
 // Create public clients for each chain
-export const publicClients: Record<number, PublicClient> = {
+export const publicClients = {
   1: createPublicClient({
     chain: mainnet,
     transport: http(process.env.NEXT_PUBLIC_MAINNET_RPC || 'https://eth.llamarpc.com'),
@@ -23,9 +23,9 @@ export const publicClients: Record<number, PublicClient> = {
     chain: polygon,
     transport: http('https://polygon-rpc.com'),
   }),
-};
+} as const;
 
 // Get client for specific chain
-export function getPublicClient(chainId: number): PublicClient {
-  return publicClients[chainId] || publicClients[1];
+export function getPublicClient(chainId: number) {
+  return publicClients[chainId as keyof typeof publicClients] || publicClients[1];
 }

@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Curve blue background -->
+  <rect width="512" height="512" rx="256" fill="#0B0E1C"/>
+  <!-- Curve swoosh in gradient -->
+  <defs>
+    <linearGradient id="curveGradient" x1="100" y1="256" x2="412" y2="256" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF005E"/>
+      <stop offset="0.5" stop-color="#0099FF"/>
+      <stop offset="1" stop-color="#FFE600"/>
+    </linearGradient>
+  </defs>
+  <!-- Smooth curve path -->
+  <path d="M100 256Q200 150 300 256Q400 362 412 256" stroke="url(#curveGradient)" stroke-width="40" stroke-linecap="round" fill="none"/>
+  <circle cx="100" cy="256" r="20" fill="#FF005E"/>
+  <circle cx="412" cy="256" r="20" fill="#FFE600"/>
+</svg>

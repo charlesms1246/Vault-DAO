@@ -21,13 +21,13 @@ export function useTokenHolders(tokenAddress?: `0x${string}`, chainId: number = 
         address: tokenAddress,
         abi: ERC20_ABI,
         functionName: 'totalSupply',
-      });
+      } as any) as bigint;
 
       const decimals = await client.readContract({
         address: tokenAddress,
         abi: ERC20_ABI,
         functionName: 'decimals',
-      });
+      } as any) as number;
 
       // Mock data for demo - in production, use The Graph
       const mockHolders: TokenHolder[] = [
