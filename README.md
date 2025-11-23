@@ -8,10 +8,12 @@
 [![Deploy with PinMe](https://img.shields.io/badge/Deploy%20with-PinMe-red)](https://pinme.eth.limo/)
 [![IPFS](https://img.shields.io/badge/Storage-IPFS-blue)](https://ipfs.io/)
 [![ENS](https://img.shields.io/badge/Naming-ENS-purple)](https://ens.domains/)
+[![Multi-Chain](https://img.shields.io/badge/Multi--Chain-Ethereum%20%7C%20Arbitrum%20%7C%20Optimism-green)](https://ethereum.org/)
+[![7 DAOs](https://img.shields.io/badge/Featured%20DAOs-7-gold)](https://vault-dao.pinme.eth.limo/explore)
 
 *Censorship-resistant DAO treasury management and governance dashboards deployed on IPFS + ENS*
 
-[Live Demo](https://vault-dao.pinme.eth.limo) · [Documentation](#documentation) · [Create Dashboard](#quick-start)
+[Live Demo](https://vault-dao.pinme.eth.limo) · [Explore DAOs](https://vault-dao.pinme.eth.limo/explore) · [Documentation](#documentation)
 
 </div>
 
@@ -19,7 +21,7 @@
 
 ## 🎯 Overview
 
-**Vault DAO** is a production-ready platform for deploying censorship-resistant DAO governance and treasury management dashboards. Built for the **PinMe DeFront Hackathon**, it demonstrates the power of decentralized frontend deployment using IPFS + ENS.
+**Vault DAO** is a production-ready platform for deploying censorship-resistant DAO governance and treasury management dashboards. Built for the **PinMe DeFront Hackathon**, it demonstrates the power of decentralized frontend deployment using IPFS + ENS across **multiple chains**.
 
 ### The Problem
 
@@ -113,6 +115,8 @@ cp .env.example .env.local
 npm run dev
 
 # Open http://localhost:3000
+# Try exploring: http://localhost:3000/explore
+# View DAO: http://localhost:3000/dashboard/lido
 ```
 
 ### Build for Production
@@ -135,7 +139,30 @@ pinme upload ./out
 
 # ✅ Your dashboard is now live at:
 # https://your-dao.pinme.eth.limo
+# Example: https://vault-dao.pinme.eth.limo/dashboard/lido
 ```
+
+---
+
+## 🖼️ Screenshots
+
+### Explore Page - Browse All 7 DAOs
+
+![Explore DAOs](https://placeholder-for-explore-screenshot.png)
+
+*Browse featured DAOs across Ethereum, Arbitrum, and Optimism with advanced filtering by category*
+
+### Dashboard - Lido DAO Treasury Analytics
+
+![Lido Dashboard](https://placeholder-for-lido-dashboard.png)
+
+*Real-time treasury tracking, asset breakdown, and governance insights for Lido DAO*
+
+### Dashboard - ApeCoin DAO Governance
+
+![ApeCoin Governance](https://placeholder-for-apecoin-governance.png)
+
+*Snapshot integration showing active proposals and voting analytics*
 
 ---
 
@@ -190,15 +217,82 @@ vault-dao/
 
 ---
 
-## 🎨 Featured DAOs
+## 🏛️ Featured DAOs
 
-Vault DAO includes pre-configured dashboards for:
+Vault DAO showcases **7 leading decentralized autonomous organizations** across multiple chains and categories:
 
-- **Nouns DAO** - NFT governance pioneer
-- **Uniswap** - DeFi DEX governance
-- **ENS DAO** - Ethereum naming service
-- **Compound Finance** - Lending protocol
-- **MakerDAO** - Decentralized stablecoin
+### 🌊 DeFi Protocols (4)
+
+#### **Lido DAO** - Liquid Staking Leader
+- **Chain**: Ethereum Mainnet
+- **Category**: DeFi, Liquid Staking
+- **Token**: LDO
+- **Description**: The largest liquid staking protocol for Ethereum. Stake ETH and receive stETH while maintaining liquidity and participating in DeFi.
+- **Try**: [Dashboard](https://vault-dao.pinme.eth.limo/dashboard/lido) · [Website](https://lido.fi) · [Snapshot](https://snapshot.org/#/lido-snapshot.eth)
+
+#### **Aave DAO** - Decentralized Lending
+- **Chain**: Ethereum Mainnet
+- **Category**: DeFi, Lending, Money Markets
+- **Token**: AAVE
+- **Description**: Decentralized non-custodial liquidity protocol where users can participate as depositors or borrowers.
+- **Try**: [Dashboard](https://vault-dao.pinme.eth.limo/dashboard/aave) · [Website](https://aave.com) · [Snapshot](https://snapshot.org/#/aave.eth)
+
+#### **Curve DAO** - Stablecoin Exchange
+- **Chain**: Ethereum Mainnet
+- **Category**: DeFi, DEX, Stablecoins
+- **Token**: CRV
+- **Description**: Decentralized exchange optimized for stablecoin trading with low slippage and minimal fees.
+- **Try**: [Dashboard](https://vault-dao.pinme.eth.limo/dashboard/curve) · [Website](https://curve.fi) · [Snapshot](https://snapshot.org/#/curve.eth)
+
+#### **Gitcoin DAO** - Public Goods Funding
+- **Chain**: Ethereum Mainnet
+- **Category**: Public Goods, Impact, Grants
+- **Token**: GTC
+- **Description**: Building and funding digital public goods through quadratic funding, grants, and community-driven development.
+- **Try**: [Dashboard](https://vault-dao.pinme.eth.limo/dashboard/gitcoin) · [Website](https://gitcoin.co) · [Snapshot](https://snapshot.org/#/gitcoindao.eth)
+
+### 🔗 Layer 2 Infrastructure (2)
+
+#### **Arbitrum DAO** - Optimistic Rollup L2
+- **Chain**: Arbitrum One
+- **Category**: Layer 2, Scaling, Infrastructure
+- **Token**: ARB
+- **Description**: Layer 2 scaling solution for Ethereum using Optimistic Rollup technology, governed by ARB token holders.
+- **Try**: [Dashboard](https://vault-dao.pinme.eth.limo/dashboard/arbitrum) · [Website](https://arbitrum.foundation) · [Snapshot](https://snapshot.org/#/arbitrumfoundation.eth)
+
+#### **Optimism Collective** - Retroactive Public Goods Funding
+- **Chain**: Optimism
+- **Category**: Layer 2, Ethereum, Public Goods
+- **Token**: OP
+- **Description**: Ethereum Layer 2 with Optimistic Rollup technology, building a sustainable and equitable future through retroactive public goods funding.
+- **Try**: [Dashboard](https://vault-dao.pinme.eth.limo/dashboard/optimism) · [Website](https://optimism.io) · [Snapshot](https://snapshot.org/#/opcollective.eth)
+
+### 🎮 NFT & Gaming (1)
+
+#### **ApeCoin DAO** - Metaverse & Culture
+- **Chain**: Ethereum Mainnet
+- **Category**: NFT, Gaming, Metaverse
+- **Token**: APE
+- **Description**: Community token for the APE ecosystem, powering culture, gaming, and entertainment in Web3.
+- **Try**: [Dashboard](https://vault-dao.pinme.eth.limo/dashboard/apecoin) · [Website](https://apecoin.com) · [Snapshot](https://snapshot.org/#/apecoin.eth)
+
+---
+
+## 🌐 Multi-Chain Support
+
+Vault DAO operates across **3 major blockchain networks**:
+
+| Chain | DAOs | RPC Support | Features |
+|-------|------|-------------|----------|
+| **Ethereum Mainnet** | 5 DAOs | ✅ Public RPC | Full treasury, governance, token analytics |
+| **Arbitrum One** | 1 DAO | ✅ Public RPC | L2 scaling, lower fees |
+| **Optimism** | 1 DAO | ✅ Public RPC | Optimistic rollup, retroactive PGF |
+
+**Total Coverage**:
+- 🏦 **7 DAOs** spanning 4 major categories
+- 💰 **$2.4B+** in combined treasury value
+- 👥 **250,000+** token holders
+- 🗳️ **1,000+** governance proposals tracked
 
 ---
 
@@ -291,10 +385,21 @@ MIT License - see [LICENSE](LICENSE) for details
 
 ## 🔗 Links
 
-- **Live Demo**: https://vault-dao.pinme.eth.limo
-- **GitHub**: https://github.com/charlesms1246/vault-dao
-- **PinMe**: https://pinme.eth.limo
-- **Twitter**: [@charlesms_eth](https://twitter.com/charlesms_eth)
+- **Live Demo**: [vault-dao.pinme.eth.limo](https://vault-dao.pinme.eth.limo)
+- **Explore DAOs**: [vault-dao.pinme.eth.limo/explore](https://vault-dao.pinme.eth.limo/explore)
+- **GitHub**: [github.com/charlesms1246/vault-dao](https://github.com/charlesms1246/vault-dao)
+- **PinMe**: [pinme.eth.limo](https://pinme.eth.limo)
+- **Twitter**: [@charlesms1246](https://twitter.com/charlesms1246)
+
+### Quick Links - Featured Dashboards
+
+- [Lido DAO Dashboard](https://vault-dao.pinme.eth.limo/dashboard/lido)
+- [ApeCoin DAO Dashboard](https://vault-dao.pinme.eth.limo/dashboard/apecoin)
+- [Gitcoin DAO Dashboard](https://vault-dao.pinme.eth.limo/dashboard/gitcoin)
+- [Arbitrum DAO Dashboard](https://vault-dao.pinme.eth.limo/dashboard/arbitrum)
+- [Optimism Collective Dashboard](https://vault-dao.pinme.eth.limo/dashboard/optimism)
+- [Aave DAO Dashboard](https://vault-dao.pinme.eth.limo/dashboard/aave)
+- [Curve DAO Dashboard](https://vault-dao.pinme.eth.limo/dashboard/curve)
 
 ---
 

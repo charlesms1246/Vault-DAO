@@ -9,7 +9,6 @@ import Image from 'next/image';
 import { 
   Search, 
   X,
-  TrendingDown,
   Users,
   DollarSign,
   ChevronDown
@@ -35,7 +34,7 @@ export default function ExplorePage() {
 
   // Filter and sort DAOs
   const filteredDAOs = useMemo(() => {
-    let filtered = FEATURED_DAOS.filter((dao) => {
+    const filtered = FEATURED_DAOS.filter((dao) => {
       const matchesSearch = 
         dao.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         dao.description.toLowerCase().includes(searchQuery.toLowerCase()) ||

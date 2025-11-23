@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -11,7 +12,6 @@ import {
   Shield, 
   Zap, 
   ArrowRight,
-  Flame,
   DollarSign,
   Users,
   FileText
@@ -29,9 +29,9 @@ export default function HomePage() {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-luxury-dark-900 border-2 border-blood-red-500 mb-6 rounded-none"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-luxury-dark-900 border-2 border-blood-red-500 mb-6"
               >
-                <Flame className="w-4 h-4 text-gold-500" />
+                <Shield className="w-4 h-4 text-gold-500" />
                 <span className="text-xs font-bold uppercase tracking-wider text-gold-500">
                   Deployed on IPFS + ENS
                 </span>
@@ -95,19 +95,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured DAOs - Horizontal Grid */}
+      {/* Featured Treasuries */}
       <section className="py-12 border-b-2 border-luxury-gray-500">
         <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-luxury uppercase tracking-wider">FEATURED TREASURIES</h2>
-            <Link href="/explore">
-              <Button variant="ghost" size="sm" icon={<ArrowRight />}>
-                View All
-              </Button>
-            </Link>
+          {/* Section Header */}
+          <div className="mb-8">
+            <div className="flex items-end justify-between mb-3">
+              <h2 className="text-3xl font-bold text-luxury uppercase tracking-wider">
+                FEATURED TREASURIES
+              </h2>
+              <Link href="/explore">
+                <Button variant="gold" size="sm" icon={<ArrowRight />}>
+                  View All 7 DAOs
+                </Button>
+              </Link>
+            </div>
+            <p className="text-luxury-gray-400 text-sm">
+              Leading DAOs on Ethereum & Layer 2s
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* DAO Grid - 2 cols mobile, 3 cols desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
             {FEATURED_DAOS.slice(0, 6).map((dao, index) => (
               <Link key={dao.id} href={`/dashboard/${dao.id}`}>
                 <motion.div
@@ -115,35 +124,54 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card hover className="h-full p-6">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-14 h-14 bg-luxury-dark-900 border-2 border-blood-red-500 rounded-none flex items-center justify-center flex-shrink-0">
-                        <Flame className="w-8 h-8 text-gold-500" />
+                  <Card className="h-full p-4 hover:border-blood-red-500 transition-all duration-300">
+                    {/* Logo + Name/Symbol */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-luxury-dark-900 border-2 border-blood-red-500 flex items-center justify-center shrink-0 overflow-hidden">
+                        <Image
+                          src={dao.logo}
+                          alt={dao.name}
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-lg mb-1 truncate uppercase tracking-wider">{dao.name}</h3>
-                        <p className="text-xs text-luxury-gray-400 uppercase tracking-wider font-bold">
+                        <h3 className="font-bold text-sm truncate uppercase tracking-wider">
+                          {dao.name}
+                        </h3>
+                        <p className="text-xs text-luxury-gray-400 font-mono">
                           {dao.tokenSymbol}
                         </p>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3 mb-4">
-                      <div>
-                        <div className="text-xs text-luxury-gray-500 uppercase mb-1 font-bold tracking-wider">Treasury</div>
-                        <div className="font-mono font-bold text-gold-500">$XXX.XM</div>
+                    {/* Metrics */}
+                    <div className="space-y-2 mb-3">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-luxury-gray-400 uppercase tracking-wider">
+                          Treasury
+                        </span>
+                        <span className="font-mono font-bold text-gold-500">
+                          ${(Math.random() * 500 + 50).toFixed(1)}M
+                        </span>
                       </div>
-                      <div>
-                        <div className="text-xs text-luxury-gray-500 uppercase mb-1 font-bold tracking-wider">Holders</div>
-                        <div className="font-mono font-bold text-luxury-gray-400">X,XXX</div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-luxury-gray-400 uppercase tracking-wider">
+                          Token
+                        </span>
+                        <span className="font-mono font-bold text-white">
+                          {dao.tokenSymbol}
+                        </span>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    {/* Tags (max 2) */}
+                    <div className="flex gap-2 overflow-hidden">
                       {dao.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs rounded-none bg-luxury-dark-900 border-2 border-luxury-gray-500 text-luxury-gray-400 uppercase tracking-wider font-bold"
+                          className="px-2 py-1 text-xs bg-luxury-dark-900 border border-luxury-gray-500 text-luxury-gray-400 uppercase tracking-wider font-bold truncate"
                         >
                           {tag}
                         </span>

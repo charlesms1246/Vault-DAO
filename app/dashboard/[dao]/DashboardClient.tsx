@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -18,8 +18,7 @@ import {
   Globe, 
   Share2,
   Download,
-  Bookmark,
-  Flame
+  Bookmark
 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
@@ -45,14 +44,19 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
 
   if (!dao) {
     return (
-      <div className="container mx-auto px-4 py-20">
-        <Card className="text-center py-20">
-          <h1 className="text-3xl font-bold mb-4 uppercase tracking-wider">DAO Not Found</h1>
+      <div className="h-full flex items-center justify-center bg-luxury-dark p-6">
+        <Card className="text-center py-20 px-8 max-w-md">
+          <div className="w-16 h-16 bg-luxury-dark-900 border-2 border-blood-red-500 flex items-center justify-center mx-auto mb-6">
+            <span className="text-3xl">❌</span>
+          </div>
+          <h1 className="text-3xl font-bold mb-4 uppercase tracking-wider text-luxury">
+            DAO Not Found
+          </h1>
           <p className="text-luxury-gray-400 mb-8">
-            The DAO you're looking for doesn't exist or hasn't been configured yet.
+            The DAO <span className="font-mono text-white">&quot;{daoId}&quot;</span> doesn&apos;t exist or hasn&apos;t been configured yet.
           </p>
           <Link href="/explore">
-            <Button variant="gold">Browse DAOs</Button>
+            <Button variant="gold">Browse All DAOs</Button>
           </Link>
         </Card>
       </div>
@@ -83,8 +87,14 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
           {/* Left: DAO Info */}
           <div className="flex items-center gap-4">
             {/* Logo */}
-            <div className="w-12 h-12 rounded-none bg-luxury-dark-900 flex items-center justify-center border-2 border-blood-red-500 shadow-red-glow">
-              <Flame className="w-6 h-6 text-gold-500" />
+            <div className="w-12 h-12 bg-luxury-dark-900 flex items-center justify-center border-2 border-blood-red-500 shadow-red-glow overflow-hidden">
+              <Image
+                src={dao.logo}
+                alt={dao.name}
+                width={48}
+                height={48}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* Title + Chain + Links */}

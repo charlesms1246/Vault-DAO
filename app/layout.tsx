@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'Vault DAO - Eternal Governance Dashboards',
   description: 'Censorship-resistant DAO treasury management and governance dashboards deployed on IPFS + ENS. Built for PinMe DeFront Hackathon.',
   keywords: ['DAO', 'DeFi', 'Governance', 'IPFS', 'ENS', 'Web3', 'Treasury'],
-  authors: [{ name: 'Charles MS', url: 'https://github.com/charlesms-eth' }],
+  authors: [{ name: 'Charles MS', url: 'https://github.com/charlesms1246' }],
   openGraph: {
     title: 'Vault DAO - Eternal Governance Dashboards',
     description: 'Your DAO treasury deserves immortality. Deploy censorship-resistant dashboards on IPFS.',
