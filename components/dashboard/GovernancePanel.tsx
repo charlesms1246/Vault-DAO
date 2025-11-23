@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { useProposals } from '@/lib/hooks/useProposals';
-import { formatDate, formatTimeAgo } from '@/lib/utils/formatters';
+import { formatTimeAgo } from '@/lib/utils/formatters';
 import { ExternalLink, Vote as VoteIcon, Clock, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
@@ -61,14 +61,14 @@ export function GovernancePanel({ snapshotSpace }: GovernancePanelProps) {
       </div>
 
       <div className="space-y-4">
-        {proposals.map((proposal) => {
+        {proposals.map((proposal, index) => {
           const isActive = proposal.state === 'active';
           const timeLeft = proposal.end - Date.now() / 1000;
           const hasEnded = timeLeft <= 0;
 
           return (
             <div
-              key={proposal.id}
+              key={`${proposal.id}-${index}`}
               className="glass-hover p-5 rounded-lg border border-white/5"
             >
               <div className="flex items-start justify-between mb-3">
@@ -104,15 +104,15 @@ export function GovernancePanel({ snapshotSpace }: GovernancePanelProps) {
                   </span>
                 </div>
                 <div className="h-2 bg-cyber-dark-700 rounded-full overflow-hidden flex">
-                  {proposal.choices.map((choice, index) => {
-                    const percentage = (proposal.scores[index] / proposal.scores_total) * 100;
+                  {proposal.choices.map((choice, idx) => {
+                    const percentage = (proposal.scores[idx] / proposal.scores_total) * 100;
                     return (
                       <div
-                        key={index}
+                        key={`${choice}-${idx}`}
                         className="h-full transition-all"
                         style={{
                           width: `${percentage}%`,
-                          background: `hsl(${(index * 120)}, 70%, 50%)`,
+                          background: `hsl(${(idx * 120)}, 70%, 50%)`,
                         }}
                       />
                     );

@@ -1,11 +1,26 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConnectButton as RainbowConnectButton } from '@rainbow-me/rainbowkit';
 import { Button } from '@/components/ui/Button';
 import { Wallet } from 'lucide-react';
 
 export function ConnectButton() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <Button variant="ghost" disabled>
+        <Wallet className="w-4 h-4 mr-2" />
+        Connect Wallet
+      </Button>
+    );
+  }
+
   return (
     <RainbowConnectButton.Custom>
       {({
@@ -14,9 +29,9 @@ export function ConnectButton() {
         openAccountModal,
         openChainModal,
         openConnectModal,
-        mounted,
+        mounted: rainbowMounted,
       }) => {
-        const ready = mounted;
+        const ready = rainbowMounted;
         const connected = ready && account && chain;
 
         return (
@@ -57,7 +72,7 @@ export function ConnectButton() {
                     variant="ghost"
                     size="sm"
                   >
-                    {chain.hasIcon && (
+                    {chain.hasIcon && chain.iconUrl && (
                       <div
                         style={{
                           background: chain.iconBackground,
@@ -68,13 +83,11 @@ export function ConnectButton() {
                           marginRight: 4,
                         }}
                       >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? 'Chain icon'}
-                            src={chain.iconUrl}
-                            style={{ width: 16, height: 16 }}
-                          />
-                        )}
+                        <img
+                          alt={chain.name ?? 'Chain icon'}
+                          src={chain.iconUrl}
+                          style={{ width: 16, height: 16 }}
+                        />
                       </div>
                     )}
                     {chain.name}

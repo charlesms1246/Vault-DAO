@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -17,7 +17,12 @@ const navItems = [
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <>
@@ -83,7 +88,7 @@ export function Navbar() {
               >
                 <Github className="w-5 h-5" />
               </Link>
-              <ConnectButton />
+              {mounted && <ConnectButton />}
             </div>
 
             {/* Mobile Menu Button */}
@@ -136,9 +141,11 @@ export function Navbar() {
                   );
                 })}
 
-                <div className="mt-4 pt-6 border-t border-white/10">
-                  <ConnectButton />
-                </div>
+                {mounted && (
+                  <div className="mt-4 pt-6 border-t border-white/10">
+                    <ConnectButton />
+                  </div>
+                )}
 
                 <Link
                   href="https://github.com/charlesms-eth/vault-dao"

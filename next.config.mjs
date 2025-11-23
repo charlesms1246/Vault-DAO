@@ -6,10 +6,28 @@ const nextConfig = {
   },
   trailingSlash: true,
   reactStrictMode: true,
-  swcMinify: true,
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, net: false, tls: false };
+  webpack: (config, { isServer }) => {
+    // Fix for wagmi/viem
+    config.resolve.fallback = { 
+      ...config.resolve.fallback,
+      fs: false, 
+      net: false, 
+      tls: false,
+      encoding: false,
+    };
+    
+    // Ignore React Native modules
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
+    
+    // Fix for @metamask/sdk React Native dependencies
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@react-native-async-storage/async-storage': false,
+        'react-native': false,
+      };
+    }
+    
     return config;
   },
 };

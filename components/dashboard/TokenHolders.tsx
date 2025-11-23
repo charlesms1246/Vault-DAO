@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Card } from '@/components/ui/Card';
-import { Chart } from '@/components/ui/Chart';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { AddressDisplay } from '@/components/web3/AddressDisplay';
 import { useTokenHolders } from '@/lib/hooks/useTokenHolders';
@@ -81,7 +80,7 @@ export function TokenHolders({ tokenAddress, chainId }: TokenHoldersProps) {
         <div className="space-y-2">
           {distribution.holders.map((holder, index) => (
             <div
-              key={holder.address}
+              key={`${holder.address}-${index}`}
               className="flex items-center justify-between p-3 glass-hover rounded-lg"
             >
               <div className="flex items-center gap-3">

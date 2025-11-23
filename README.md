@@ -1,36 +1,309 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔥 Vault DAO - Eternal Governance Dashboards
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+**"Your DAO treasury deserves immortality"**
+
+[![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js%2015-black)](https://nextjs.org/)
+[![Deploy with PinMe](https://img.shields.io/badge/Deploy%20with-PinMe-red)](https://pinme.eth.limo/)
+[![IPFS](https://img.shields.io/badge/Storage-IPFS-blue)](https://ipfs.io/)
+[![ENS](https://img.shields.io/badge/Naming-ENS-purple)](https://ens.domains/)
+
+*Censorship-resistant DAO treasury management and governance dashboards deployed on IPFS + ENS*
+
+[Live Demo](https://vault-dao.pinme.eth.limo) · [Documentation](#documentation) · [Create Dashboard](#quick-start)
+
+</div>
+
+---
+
+## 🎯 Overview
+
+**Vault DAO** is a production-ready platform for deploying censorship-resistant DAO governance and treasury management dashboards. Built for the **PinMe DeFront Hackathon**, it demonstrates the power of decentralized frontend deployment using IPFS + ENS.
+
+### The Problem
+
+- **Smart contracts are eternal**, but their frontends are vulnerable
+- Domain seizures, hosting failures, and team departures can lock communities out
+- DAOs need **unkillable interfaces** for critical governance operations
+
+### The Solution
+
+Vault DAO provides:
+- ✅ **Real-time treasury analytics** with live on-chain data
+- ✅ **Governance voting interfaces** via Snapshot integration
+- ✅ **Token holder analytics** with distribution insights
+- ✅ **100% static deployment** - works perfectly with PinMe
+- ✅ **Censorship-resistant** - deployed on IPFS, accessible via ENS
+
+---
+
+## ✨ Features
+
+### Core Capabilities
+
+- 🏦 **Treasury Management**
+  - Real-time asset balances from multiple addresses
+  - Live token prices via CoinGecko
+  - Historical value charts
+  - Asset distribution breakdown
+  
+- 🗳️ **Governance Portal**
+  - Active proposal listings from Snapshot
+  - Voting interface with wallet integration
+  - Quorum tracking and vote analytics
+  - Historical proposal archive
+
+- 👥 **Token Analytics**
+  - Top holder rankings
+  - Distribution metrics (Gini coefficient)
+  - Concentration analysis
+  - Governance power insights
+
+- 🔐 **Gnosis Safe Integration**
+  - Pending transaction monitoring
+  - Multi-sig signature tracking
+  - Transaction history
+
+- 📊 **Activity Feed**
+  - Recent treasury transactions
+  - Governance votes
+  - Proposal submissions
+
+### Technical Excellence
+
+- **Framework**: Next.js 15 with App Router (static export)
+- **Web3**: wagmi + viem + RainbowKit for wallet integration
+- **State**: Zustand with persistence
+- **Styling**: Tailwind CSS with custom cyberpunk theme
+- **Animations**: Framer Motion for smooth transitions
+- **Charts**: Recharts for data visualization
+- **APIs**: Snapshot, CoinGecko, Etherscan integration
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Node.js 18+
+npm or yarn or pnpm
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Clone the repository
+git clone https://github.com/charlesms1246/vault-dao.git
+cd vault-dao
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Install dependencies
+npm install
 
-## Learn More
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your API keys
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Start development server
+npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Open http://localhost:3000
+```
 
-## Deploy on Vercel
+### Build for Production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Create static export
+npm run build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Output will be in ./out directory
+```
+
+### Deploy with PinMe
+
+```bash
+# Install PinMe CLI
+npm install -g pinme
+
+# Deploy to IPFS + ENS
+pinme upload ./out
+
+# ✅ Your dashboard is now live at:
+# https://your-dao.pinme.eth.limo
+```
+
+---
+
+## 📖 Documentation
+
+### Environment Variables
+
+Create a `.env.local` file:
+
+```env
+# Required for wallet connection
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id_here
+
+# Optional - for enhanced features
+NEXT_PUBLIC_COINGECKO_API_KEY=your_coingecko_key
+NEXT_PUBLIC_ETHERSCAN_API_KEY=your_etherscan_key
+NEXT_PUBLIC_ALCHEMY_API_KEY=your_alchemy_key
+```
+
+### Project Structure
+
+```
+vault-dao/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Landing page
+│   ├── dashboard/[dao]/   # DAO dashboard
+│   ├── explore/           # Browse DAOs
+│   └── create/            # Create custom dashboard
+├── components/            # React components
+│   ├── dashboard/         # Dashboard-specific components
+│   ├── ui/                # Reusable UI primitives
+│   ├── web3/              # Web3 components
+│   └── animations/        # Animation components
+├── lib/                   # Core utilities
+│   ├── api/               # External API integrations
+│   ├── contracts/         # Smart contract ABIs
+│   ├── hooks/             # Custom React hooks
+│   └── utils/             # Helper functions
+└── store/                 # Zustand stores
+```
+
+### Creating a Custom Dashboard
+
+1. Navigate to `/create`
+2. Fill in your DAO information:
+   - Basic info (name, description, token)
+   - Contract addresses (treasury, governor, safe)
+   - Social links (optional)
+3. Review and create
+4. View your dashboard immediately
+5. Build and deploy with PinMe
+
+---
+
+## 🎨 Featured DAOs
+
+Vault DAO includes pre-configured dashboards for:
+
+- **Nouns DAO** - NFT governance pioneer
+- **Uniswap** - DeFi DEX governance
+- **ENS DAO** - Ethereum naming service
+- **Compound Finance** - Lending protocol
+- **MakerDAO** - Decentralized stablecoin
+
+---
+
+## 🏗️ Technical Architecture
+
+### Stack
+
+```typescript
+Framework:     Next.js 15 (Static Export)
+Language:      TypeScript 5.8+
+Styling:       Tailwind CSS 3.4+
+State:         Zustand 5.0+
+Web3:          wagmi 2.12+, viem 2.21+, RainbowKit 2.1+
+Data Fetching: TanStack Query 5.59+
+Animation:     Framer Motion 12.23+
+Charts:        Recharts 2.12+
+APIs:          Snapshot, CoinGecko, Etherscan
+```
+
+### Data Flow
+
+```
+User Wallet Connection
+        ↓
+RainbowKit → wagmi → viem
+        ↓
+Public RPC Nodes (on-chain reads)
+        ↓
+React Hooks (useTreasury, useProposals, etc.)
+        ↓
+Zustand Store (state management)
+        ↓
+UI Components (with animations)
+```
+
+### Static Export Compatibility
+
+All data fetching happens **client-side**:
+- ✅ No server-side rendering (SSR)
+- ✅ No API routes
+- ✅ Pure static HTML/CSS/JS
+- ✅ Perfect for IPFS deployment
+
+---
+
+## 🎯 Hackathon Criteria
+
+Built for the **PinMe DeFront Hackathon**, Vault DAO meets all requirements:
+
+| Criteria | Implementation |
+|----------|----------------|
+| **Decentralized Frontend** | ✅ 100% static export, zero server dependencies |
+| **PinMe Deployment** | ✅ Single-command deployment via PinMe CLI |
+| **ENS Integration** | ✅ Each DAO gets a unique ENS subdomain |
+| **IPFS Pinning** | ✅ Permanent storage on IPFS network |
+| **Verifiable Content** | ✅ Content-addressed with cryptographic CIDs |
+| **Censorship Resistant** | ✅ Accessible via eth.limo gateways |
+| **DAO/DeFi Focus** | ✅✅✅ **Entire app dedicated to DAO governance** |
+| **Innovation** | ✅ Real on-chain data, not mock demos |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+MIT License - see [LICENSE](LICENSE) for details
+
+---
+
+## 🙏 Acknowledgments
+
+- **PinMe Team** - For creating an amazing deployment tool
+- **Glitter Protocol** - For hosting the hackathon
+- **Snapshot** - For governance infrastructure
+- **RainbowKit** - For beautiful wallet connection UX
+- **Next.js Team** - For an incredible framework
+
+---
+
+## 🔗 Links
+
+- **Live Demo**: https://vault-dao.pinme.eth.limo
+- **GitHub**: https://github.com/charlesms1246/vault-dao
+- **PinMe**: https://pinme.eth.limo
+- **Twitter**: [@charlesms_eth](https://twitter.com/charlesms_eth)
+
+---
+
+<div align="center">
+
+**Built with 🔥 by [@charlesms1246](https://github.com/charlesms1246)**
+
+*For the PinMe DeFront Hackathon - November 2025*
+
+[![Deploy with PinMe](https://img.shields.io/badge/Deploy%20Now-PinMe-red?style=for-the-badge)](https://pinme.eth.limo/)
+
+</div>

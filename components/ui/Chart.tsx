@@ -65,7 +65,7 @@ export function Chart({
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      {type === 'line' && (
+      {type === 'line' ? (
         <LineChart {...commonProps}>
           {showGrid && (
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -83,9 +83,7 @@ export function Chart({
             activeDot={{ r: 6 }}
           />
         </LineChart>
-      )}
-
-      {type === 'area' && (
+      ) : type === 'area' ? (
         <AreaChart {...commonProps}>
           {showGrid && (
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -108,9 +106,7 @@ export function Chart({
             fill="url(#colorGradient)"
           />
         </AreaChart>
-      )}
-
-      {type === 'bar' && (
+      ) : type === 'bar' ? (
         <BarChart {...commonProps}>
           {showGrid && (
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -121,16 +117,14 @@ export function Chart({
           {showLegend && <Legend />}
           <Bar dataKey={dataKey} fill={color} radius={[8, 8, 0, 0]} />
         </BarChart>
-      )}
-
-      {type === 'pie' && (
+      ) : (
         <PieChart>
           <Pie
             data={data}
             cx="50%"
             cy="50%"
             labelLine={false}
-            label={({ name, percent }) =>
+            label={({ name, percent }: any) =>
               `${name}: ${(percent * 100).toFixed(0)}%`
             }
             outerRadius={100}

@@ -56,7 +56,7 @@ export function AssetBreakdown({ treasuryAddresses, chainId }: AssetBreakdownPro
         <div className="space-y-3">
           {treasury.assets.map((asset, index) => (
             <div
-              key={asset.symbol}
+              key={`${asset.symbol}-${index}`}
               className="flex items-center justify-between p-4 glass-hover rounded-lg"
             >
               <div className="flex items-center gap-3">

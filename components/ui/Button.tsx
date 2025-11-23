@@ -1,16 +1,21 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import clsx from 'clsx';
 import { Loader2 } from 'lucide-react';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
+  children?: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
   icon?: React.ReactNode;
   fullWidth?: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  className?: string;
 }
 
 export function Button({
@@ -22,6 +27,8 @@ export function Button({
   fullWidth = false,
   className,
   disabled,
+  onClick,
+  type = 'button',
   ...props
 }: ButtonProps) {
   const baseStyles = 'font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2';
@@ -52,7 +59,8 @@ export function Button({
         className
       )}
       disabled={disabled || loading}
-      {...props}
+      onClick={onClick}
+      type={type}
     >
       {loading ? (
         <>
