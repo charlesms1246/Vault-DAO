@@ -1,4 +1,6 @@
-# 🔥 Vault DAO - Eternal Governance Dashboards
+<h1 align="center">
+   Vault DAO - Eternal Governance Dashboards
+</h1>
 
 <div align="center">
 
