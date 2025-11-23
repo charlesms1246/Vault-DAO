@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { PageTransition } from '@/components/animations/PageTransition';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Tabs } from '@/components/ui/Tabs';
 import { Badge } from '@/components/ui/Badge';
 import { TreasuryOverview } from '@/components/dashboard/TreasuryOverview';
 import { AssetBreakdown } from '@/components/dashboard/AssetBreakdown';
@@ -13,20 +11,20 @@ import { GovernancePanel } from '@/components/dashboard/GovernancePanel';
 import { TokenHolders } from '@/components/dashboard/TokenHolders';
 import { ActivityFeed } from '@/components/dashboard/ActivityFeed';
 import { useDaoStore } from '@/store/daoStore';
-import { useUserStore } from '@/store/userStore';
 import { FEATURED_DAOS, CHAIN_NAMES } from '@/lib/constants';
 import { 
   ExternalLink, 
   Twitter, 
   Globe, 
-  MessageCircle,
-  Star,
   Share2,
   Download,
+  Bookmark,
   Flame
 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
+
+type PanelType = 'treasury' | 'governance';
 
 interface DashboardClientProps {
   daoId: string;
@@ -34,7 +32,7 @@ interface DashboardClientProps {
 
 export function DashboardClient({ daoId }: DashboardClientProps) {
   const { setSelectedDAO } = useDaoStore();
-  const { favoriteDAOs, addFavoriteDAO, removeFavoriteDAO } = useUserStore();
+  const [activePanel, setActivePanel] = useState<PanelType>('treasury');
 
   // Find DAO config
   const dao = FEATURED_DAOS.find((d) => d.id === daoId);
@@ -47,33 +45,19 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
 
   if (!dao) {
     return (
-      <PageTransition>
-        <div className="container mx-auto px-4 py-20">
-          <Card className="text-center py-20">
-            <h1 className="text-3xl font-bold mb-4">DAO Not Found</h1>
-            <p className="text-gray-400 mb-8">
-              The DAO you're looking for doesn't exist or hasn't been configured yet.
-            </p>
-            <Link href="/explore">
-              <Button>Browse DAOs</Button>
-            </Link>
-          </Card>
-        </div>
-      </PageTransition>
+      <div className="container mx-auto px-4 py-20">
+        <Card className="text-center py-20">
+          <h1 className="text-3xl font-bold mb-4 uppercase tracking-wider">DAO Not Found</h1>
+          <p className="text-luxury-gray-400 mb-8">
+            The DAO you're looking for doesn't exist or hasn't been configured yet.
+          </p>
+          <Link href="/explore">
+            <Button variant="gold">Browse DAOs</Button>
+          </Link>
+        </Card>
+      </div>
     );
   }
-
-  const isFavorite = favoriteDAOs.includes(dao.id);
-
-  const handleFavorite = () => {
-    if (isFavorite) {
-      removeFavoriteDAO(dao.id);
-      toast.success('Removed from favorites');
-    } else {
-      addFavoriteDAO(dao.id);
-      toast.success('Added to favorites');
-    }
-  };
 
   const handleShare = () => {
     if (typeof window !== 'undefined') {
@@ -87,212 +71,172 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
     toast.success('Exporting data... (Coming soon)');
   };
 
-  const tabs = [
-    { id: 'overview', label: 'Overview', icon: <Flame className="w-4 h-4" /> },
-    { id: 'governance', label: 'Governance' },
-    { id: 'holders', label: 'Token Holders' },
-    { id: 'activity', label: 'Activity' },
-  ];
+  const handleBookmark = () => {
+    toast.success('Bookmarked!');
+  };
 
   return (
-    <PageTransition>
-      <div className="min-h-screen pb-20">
-        {/* Header */}
-        <div className="border-b-2 border-blood-red-500/30 bg-luxury-dark-800/90 backdrop-blur-xl">
-          <div className="container mx-auto px-4 py-8">
-            <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-              {/* DAO Info */}
-              <div className="flex items-start gap-6">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 200 }}
-                  className="w-20 h-20 rounded-none bg-luxury-dark-900 flex items-center justify-center shrink-0 border-4 border-blood-red-500 shadow-red-glow-lg"
-                >
-                  <Flame className="w-10 h-10 text-gold-500" style={{ filter: 'drop-shadow(0 0 8px rgba(234, 179, 8, 0.8))' }} />
-                </motion.div>
+    <div className="h-full flex flex-col bg-luxury-dark">
+      {/* Compact Header Bar */}
+      <div className="border-b-2 border-luxury-gray-500 bg-luxury-dark-800 px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Left: DAO Info */}
+          <div className="flex items-center gap-4">
+            {/* Logo */}
+            <div className="w-12 h-12 rounded-none bg-luxury-dark-900 flex items-center justify-center border-2 border-blood-red-500 shadow-red-glow">
+              <Flame className="w-6 h-6 text-gold-500" />
+            </div>
 
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-wider gradient-text">{dao.name}</h1>
-                    <Badge variant="gold">{CHAIN_NAMES[dao.chain] || 'Unknown'}</Badge>
-                  </div>
-                  <p className="text-luxury-gray-300 mb-4 max-w-2xl">{dao.description}</p>
-                  
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {dao.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-xs rounded-none bg-luxury-dark-900 border-2 border-luxury-gray-500 text-luxury-gray-300 uppercase tracking-wider font-bold hover:border-gold-500 hover:text-gold-500 transition-all duration-300 cursor-default"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Social Links */}
-                  <div className="flex items-center gap-3">
-                    {dao.website && (
-                      <a
-                        href={dao.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-luxury-gray-400 hover:text-gold-500 transition-all duration-300 hover:scale-110"
-                      >
-                        <Globe className="w-5 h-5" />
-                      </a>
-                    )}
-                    {dao.twitter && (
-                      <a
-                        href={`https://twitter.com/${dao.twitter}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-luxury-gray-400 hover:text-gold-500 transition-all duration-300 hover:scale-110"
-                      >
-                        <Twitter className="w-5 h-5" />
-                      </a>
-                    )}
-                    {dao.discord && (
-                      <a
-                        href={dao.discord}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-luxury-gray-400 hover:text-gold-500 transition-all duration-300 hover:scale-110"
-                      >
-                        <MessageCircle className="w-5 h-5" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex flex-wrap gap-3">
-                <Button
-                  variant="gold"
-                  size="sm"
-                  onClick={handleFavorite}
-                  icon={<Star className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />}
-                >
-                  {isFavorite ? 'Favorited' : 'Favorite'}
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleShare}
-                  icon={<Share2 className="w-4 h-4" />}
-                >
-                  Share
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleExport}
-                  icon={<Download className="w-4 h-4" />}
-                >
-                  Export
-                </Button>
+            {/* Title + Chain + Links */}
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold uppercase tracking-wider text-luxury">
+                {dao.name}
+              </h1>
+              <Badge variant="gold" size="sm">{CHAIN_NAMES[dao.chain] || 'Unknown'}</Badge>
+              
+              {/* Social Links */}
+              <div className="flex items-center gap-2 ml-2">
+                {dao.website && (
+                  <a
+                    href={dao.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-luxury-gray-400 hover:text-gold-500 transition-colors"
+                  >
+                    <Globe className="w-4 h-4" />
+                  </a>
+                )}
+                {dao.twitter && (
+                  <a
+                    href={`https://twitter.com/${dao.twitter}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-luxury-gray-400 hover:text-gold-500 transition-colors"
+                  >
+                    <Twitter className="w-4 h-4" />
+                  </a>
+                )}
               </div>
             </div>
           </div>
+
+          {/* Right: Actions */}
+          <div className="flex gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleBookmark}
+              icon={<Bookmark className="w-4 h-4" />}
+            >
+              Save
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleShare}
+              icon={<Share2 className="w-4 h-4" />}
+            >
+              Share
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleExport}
+              icon={<Download className="w-4 h-4" />}
+            >
+              Export
+            </Button>
+          </div>
         </div>
+      </div>
 
-        {/* Content */}
-        <div className="container mx-auto px-4 py-8">
-          <Tabs tabs={tabs}>
-            {(activeTab) => (
+      {/* Split Panel Layout */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left Panel */}
+        <div className="flex-1 flex flex-col border-r-2 border-luxury-gray-500 overflow-hidden">
+          {/* Panel Tabs */}
+          <div className="flex border-b-2 border-luxury-gray-500">
+            <button
+              onClick={() => setActivePanel('treasury')}
+              className={`flex-1 px-6 py-4 text-sm font-bold uppercase tracking-wider transition-all duration-200 ${
+                activePanel === 'treasury'
+                  ? 'bg-luxury-dark-900 text-gold-500 border-b-2 border-gold-500 -mb-0.5'
+                  : 'text-luxury-gray-400 hover:text-white hover:bg-luxury-dark-800'
+              }`}
+            >
+              Treasury Analytics
+            </button>
+            <button
+              onClick={() => setActivePanel('governance')}
+              className={`flex-1 px-6 py-4 text-sm font-bold uppercase tracking-wider transition-all duration-200 ${
+                activePanel === 'governance'
+                  ? 'bg-luxury-dark-900 text-gold-500 border-b-2 border-gold-500 -mb-0.5'
+                  : 'text-luxury-gray-400 hover:text-white hover:bg-luxury-dark-800'
+              }`}
+            >
+              Governance
+            </button>
+          </div>
+
+          {/* Scrollable Panel Content */}
+          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            {activePanel === 'treasury' && (
               <>
-                {activeTab === 'overview' && (
-                  <div className="space-y-8">
-                    {/* Treasury Overview */}
-                    <TreasuryOverview
-                      treasuryAddresses={dao.treasury}
-                      chainId={dao.chain}
-                    />
+                <TreasuryOverview
+                  treasuryAddresses={dao.treasury}
+                  chainId={dao.chain}
+                />
+                
+                <AssetBreakdown
+                  treasuryAddresses={dao.treasury}
+                  chainId={dao.chain}
+                />
+                
+                <TokenHolders tokenAddress={dao.token} chainId={dao.chain} />
+              </>
+            )}
 
-                    {/* Two Column Layout */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                      {/* Asset Breakdown */}
-                      <AssetBreakdown
-                        treasuryAddresses={dao.treasury}
-                        chainId={dao.chain}
-                      />
-
-                      {/* Governance Panel */}
-                      <GovernancePanel snapshotSpace={dao.snapshot} />
-                    </div>
-
-                    {/* Activity Feed */}
-                    <ActivityFeed />
-                  </div>
-                )}
-
-                {activeTab === 'governance' && (
-                  <div className="space-y-8">
-                    <GovernancePanel snapshotSpace={dao.snapshot} />
-                    
-                    {dao.snapshot && (
-                      <Card>
-                        <h3 className="text-xl font-bold mb-4">About Governance</h3>
-                        <p className="text-gray-400 mb-4">
-                          This DAO uses Snapshot for off-chain governance voting. Connect your wallet to participate in active proposals.
-                        </p>
-                        <a
-                          href={`https://snapshot.org/#/${dao.snapshot}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Button variant="secondary" icon={<ExternalLink className="w-4 h-4" />}>
-                            View on Snapshot
-                          </Button>
-                        </a>
-                      </Card>
-                    )}
-                  </div>
-                )}
-
-                {activeTab === 'holders' && (
-                  <div className="space-y-8">
-                    <TokenHolders tokenAddress={dao.token} chainId={dao.chain} />
-                    
-                    <Card>
-                      <h3 className="text-xl font-bold mb-4">Distribution Analysis</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <h4 className="font-bold mb-2 uppercase tracking-wider">Gini Coefficient</h4>
-                          <p className="text-sm text-gray-400">
-                            Measures wealth distribution inequality. Lower is more equal distribution (0 = perfect equality, 1 = maximum inequality).
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-bold mb-2 uppercase tracking-wider">Concentration Risk</h4>
-                          <p className="text-sm text-gray-400">
-                            High concentration in top holders can indicate centralization risk for governance decisions.
-                          </p>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
-                )}
-
-                {activeTab === 'activity' && (
-                  <div className="space-y-8">
-                    <ActivityFeed />
-                    
-                    <Card className="text-center py-12">
-                      <h3 className="text-xl font-bold mb-2">Coming Soon</h3>
-                      <p className="text-gray-400">
-                        Advanced activity filtering and historical analytics
-                      </p>
-                    </Card>
-                  </div>
+            {activePanel === 'governance' && (
+              <>
+                <GovernancePanel snapshotSpace={dao.snapshot} />
+                
+                {dao.snapshot && (
+                  <Card className="p-6">
+                    <h3 className="text-xl font-bold mb-4 uppercase tracking-wider">Snapshot Integration</h3>
+                    <p className="text-luxury-gray-400 mb-4">
+                      This DAO uses Snapshot for off-chain governance voting. Connect your wallet to participate in active proposals.
+                    </p>
+                    <a
+                      href={`https://snapshot.org/#/${dao.snapshot}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="gold" icon={<ExternalLink className="w-4 h-4" />}>
+                        View on Snapshot
+                      </Button>
+                    </a>
+                  </Card>
                 )}
               </>
             )}
-          </Tabs>
+          </div>
+        </div>
+
+        {/* Right Panel: Activity Feed (Fixed Width) */}
+        <div className="w-96 flex flex-col bg-luxury-dark-900 overflow-hidden">
+          {/* Sticky Header */}
+          <div className="border-b-2 border-luxury-gray-500 px-6 py-4">
+            <h2 className="text-sm font-bold uppercase tracking-wider text-gold-500">
+              Live Activity
+            </h2>
+          </div>
+
+          {/* Scrollable Activity Feed */}
+          <div className="flex-1 overflow-y-auto p-6">
+            <ActivityFeed />
+          </div>
         </div>
       </div>
-    </PageTransition>
+    </div>
   );
 }

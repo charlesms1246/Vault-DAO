@@ -1,291 +1,198 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Hero } from '@/components/Hero';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { FEATURED_DAOS } from '@/lib/constants';
 import { 
+  TrendingUp, 
   Shield, 
   Zap, 
-  Globe, 
-  Lock, 
-  TrendingUp, 
-  Users,
   ArrowRight,
-  CheckCircle,
-  Flame
+  Flame,
+  DollarSign,
+  Users,
+  FileText
 } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
-
-const features = [
-  {
-    icon: <Shield className="w-6 h-6" />,
-    title: 'Censorship Resistant',
-    description: 'Deployed on IPFS, your dashboard can never be taken down or blocked.',
-    color: 'from-blood-red-500 to-blood-red-600',
-  },
-  {
-    icon: <Zap className="w-6 h-6" />,
-    title: 'Real-time Data',
-    description: 'Live treasury balances, proposals, and token analytics fetched on-chain.',
-    color: 'from-gold-500 to-gold-600',
-  },
-  {
-    icon: <Globe className="w-6 h-6" />,
-    title: 'ENS Powered',
-    description: 'Human-readable domains via ENS with automatic contenthash records.',
-    color: 'from-blood-red-400 to-blood-red-500',
-  },
-  {
-    icon: <Lock className="w-6 h-6" />,
-    title: 'Zero Custody',
-    description: 'Read-only interface. Your treasury funds remain completely secure.',
-    color: 'from-gold-400 to-gold-500',
-  },
-  {
-    icon: <TrendingUp className="w-6 h-6" />,
-    title: 'Treasury Analytics',
-    description: 'Asset breakdown, historical value charts, and portfolio insights.',
-    color: 'from-blood-red-500 to-gold-500',
-  },
-  {
-    icon: <Users className="w-6 h-6" />,
-    title: 'Token Distribution',
-    description: 'Holder analytics, concentration metrics, and governance insights.',
-    color: 'from-gold-500 to-blood-red-500',
-  },
-];
-
-const benefits = [
-  'No hosting costs - permanent storage',
-  'Survives domain seizures',
-  'Community can redeploy instantly',
-  'Works even if main site goes down',
-  'Verifiable on-chain data',
-  'Open source and forkable',
-];
 
 export default function HomePage() {
   return (
-    <div className="relative">
-      {/* Hero Section */}
-      <Hero />
-
-      {/* Features Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Built for <span className="gradient-text">Permanence</span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Everything you need for DAO governance and treasury management, deployed to last forever.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, index) => (
+    <div className="min-h-full bg-luxury-dark">
+      {/* Hero Command Center */}
+      <section className="border-b-2 border-luxury-gray-500 bg-luxury-dark-800">
+        <div className="container mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Title & CTA */}
+            <div>
               <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-luxury-dark-900 border-2 border-blood-red-500 mb-6 rounded-none"
               >
-                <Card variant="luxury" hover className="h-full">
-                  <div className={`w-12 h-12 rounded-none bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 border-2 border-white/20`}>
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 uppercase tracking-wider">{feature.title}</h3>
-                  <p className="text-gray-400">{feature.description}</p>
-                </Card>
+                <Flame className="w-4 h-4 text-gold-500" />
+                <span className="text-xs font-bold uppercase tracking-wider text-gold-500">
+                  Deployed on IPFS + ENS
+                </span>
               </motion.div>
-            ))}
+
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                <span className="text-luxury">ETERNAL</span>
+                <br />
+                <span className="text-white">GOVERNANCE</span>
+                <br />
+                <span className="text-luxury-gray-400">COMMAND CENTER</span>
+              </h1>
+
+              <p className="text-xl text-luxury-gray-400 mb-8 leading-relaxed">
+                Censorship-resistant DAO treasury dashboards. Your governance interface, immortalized on the decentralized web.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Link href="/explore">
+                  <Button variant="gold" size="lg" icon={<ArrowRight />}>
+                    Launch Dashboard
+                  </Button>
+                </Link>
+                <Link href="/create">
+                  <Button variant="secondary" size="lg">
+                    Create Custom
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right: Live Stats Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { label: 'Total Treasury Value', value: '$2.4B', icon: DollarSign, color: 'gold' },
+                { label: 'Active DAOs', value: '247', icon: Users, color: 'red' },
+                { label: 'Live Proposals', value: '1,234', icon: FileText, color: 'gold' },
+                { label: 'Deployments', value: '5,678', icon: Zap, color: 'red' },
+              ].map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <Card className="text-center p-6 border-2 border-luxury-gray-500 hover:border-gold-500 transition-all duration-300">
+                    <stat.icon className={`w-8 h-8 mx-auto mb-3 ${
+                      stat.color === 'gold' ? 'text-gold-500' : 'text-blood-red-500'
+                    }`} />
+                    <div className="text-3xl font-bold font-mono text-luxury mb-2">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs text-luxury-gray-400 uppercase tracking-wider font-bold">
+                      {stat.label}
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured DAOs */}
-      <section className="py-20 bg-gradient-to-b from-transparent to-luxury-dark-800">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Featured <span className="gradient-text">DAOs</span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Explore dashboards for the biggest DAOs in DeFi and beyond
-            </p>
-          </motion.div>
+      {/* Featured DAOs - Horizontal Grid */}
+      <section className="py-12 border-b-2 border-luxury-gray-500">
+        <div className="container mx-auto px-6">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-luxury uppercase tracking-wider">FEATURED TREASURIES</h2>
+            <Link href="/explore">
+              <Button variant="ghost" size="sm" icon={<ArrowRight />}>
+                View All
+              </Button>
+            </Link>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {FEATURED_DAOS.slice(0, 3).map((dao, index) => (
-              <motion.div
-                key={dao.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link href={`/dashboard/${dao.id}`}>
-                  <Card hover className="h-full">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-16 h-16 rounded-none bg-luxury-dark-800 border-4 border-blood-red-500 flex items-center justify-center shadow-red-glow">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {FEATURED_DAOS.slice(0, 6).map((dao, index) => (
+              <Link key={dao.id} href={`/dashboard/${dao.id}`}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Card hover className="h-full p-6">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-14 h-14 bg-luxury-dark-900 border-2 border-blood-red-500 rounded-none flex items-center justify-center flex-shrink-0">
                         <Flame className="w-8 h-8 text-gold-500" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold uppercase tracking-wider">{dao.name}</h3>
-                        <p className="text-sm text-gray-400 font-mono">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-lg mb-1 truncate uppercase tracking-wider">{dao.name}</h3>
+                        <p className="text-xs text-luxury-gray-400 uppercase tracking-wider font-bold">
                           {dao.tokenSymbol}
                         </p>
                       </div>
                     </div>
-                    <p className="text-gray-400 mb-4 line-clamp-2">
-                      {dao.description}
-                    </p>
+
+                    <div className="grid grid-cols-2 gap-3 mb-4">
+                      <div>
+                        <div className="text-xs text-luxury-gray-500 uppercase mb-1 font-bold tracking-wider">Treasury</div>
+                        <div className="font-mono font-bold text-gold-500">$XXX.XM</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-luxury-gray-500 uppercase mb-1 font-bold tracking-wider">Holders</div>
+                        <div className="font-mono font-bold text-luxury-gray-400">X,XXX</div>
+                      </div>
+                    </div>
+
                     <div className="flex flex-wrap gap-2">
-                      {dao.tags.map((tag) => (
+                      {dao.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs rounded-none bg-luxury-dark-800 border-2 border-luxury-gray-500 text-gray-400 hover:border-gold-500 transition-colors uppercase tracking-wider font-bold"
+                          className="px-2 py-1 text-xs rounded-none bg-luxury-dark-900 border-2 border-luxury-gray-500 text-luxury-gray-400 uppercase tracking-wider font-bold"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
                   </Card>
-                </Link>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </div>
-
-          <div className="text-center">
-            <Link href="/explore">
-              <Button variant="secondary" icon={<ArrowRight className="w-5 h-5" />}>
-                View All DAOs
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Why <span className="gradient-text">Vault DAO</span>?
-              </h2>
-              <p className="text-xl text-gray-400 mb-8">
-                Traditional hosting fails. Domains get seized. Servers go down. But your DAO's governance can't afford downtime.
-              </p>
-              <div className="space-y-4">
-                {benefits.map((benefit, index) => (
-                  <motion.div
-                    key={benefit}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className="w-6 h-6 rounded-none bg-blood-red-500/20 border-2 border-blood-red-500 flex items-center justify-center shrink-0">
-                      <CheckCircle className="w-4 h-4 text-blood-red-500" />
-                    </div>
-                    <span className="text-gray-300">{benefit}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+      {/* Why Vault DAO - 3 Column Features */}
+      <section className="py-12">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12 text-luxury uppercase tracking-wider">
+            UNSTOPPABLE INFRASTRUCTURE
+          </h2>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <Card variant="glow-gold" className="p-8">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-none bg-gold-500/20 border-2 border-gold-500 flex items-center justify-center">
-                      <Shield className="w-6 h-6 text-gold-500" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold uppercase tracking-wider">Deployed via PinMe</h4>
-                      <p className="text-sm text-gray-400">One command deployment</p>
-                    </div>
-                  </div>
-                  <div className="bg-luxury-dark-800/50 border-2 border-luxury-gray-500 p-4 rounded-none font-mono text-sm">
-                    <div className="text-gray-500 mb-2"># Build and deploy</div>
-                    <div className="text-gold-500">$ npm run build</div>
-                    <div className="text-gold-500">$ pinme upload ./out</div>
-                    <div className="mt-4 text-gray-500">✓ Deployed to IPFS</div>
-                    <div className="text-gray-500">✓ ENS contenthash set</div>
-                    <div className="text-gray-500">✓ Gateway URL active</div>
-                  </div>
-                  <div className="pt-4 border-t-2 border-luxury-gray-500">
-                    <p className="text-sm text-gray-400">
-                      Your dashboard lives forever at:
-                    </p>
-                    <p className="font-mono text-gold-500 text-sm mt-2">
-                      https://your-dao.pinme.eth.limo
-                    </p>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Shield,
+                title: 'CENSORSHIP RESISTANT',
+                desc: 'Deployed on IPFS. No single point of failure. Forever accessible.',
+              },
+              {
+                icon: Zap,
+                title: 'REAL-TIME DATA',
+                desc: 'Live on-chain treasury data. Snapshot governance. Always current.',
+              },
+              {
+                icon: TrendingUp,
+                title: 'GOVERNANCE POWER',
+                desc: 'Vote on proposals. Track execution. Full transparency.',
+              },
+            ].map((feature, idx) => (
+              <Card key={idx} variant={idx === 1 ? 'glow-gold' : 'glow-red'} className="p-6">
+                <feature.icon className="w-12 h-12 text-gold-500 mb-4" />
+                <h3 className="text-xl font-bold mb-3 uppercase tracking-wider">
+                  {feature.title}
+                </h3>
+                <p className="text-luxury-gray-400 text-sm leading-relaxed">
+                  {feature.desc}
+                </p>
               </Card>
-            </motion.div>
+            ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blood-red-500/10 via-gold-500/10 to-blood-red-500/10" />
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Deploy Your DAO Dashboard
-              <br />
-              <span className="gradient-text">In 60 Seconds</span>
-            </h2>
-            <p className="text-xl text-gray-400 mb-8">
-              No servers. No hosting costs. No maintenance. Just eternal governance.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/create">
-                <Button variant="gold" size="lg" icon={<Flame className="w-5 h-5" />}>
-                  Create Dashboard
-                </Button>
-              </Link>
-              <Link href="https://github.com/charlesms1246/vault-dao">
-                <Button variant="ghost" size="lg">
-                  View on GitHub
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </div>

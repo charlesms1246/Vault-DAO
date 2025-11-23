@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { Web3Provider } from '@/components/providers/Web3Provider';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
-import { ParticleField } from '@/components/animations/ParticleField';
+import { Sidebar } from '@/components/layout/Sidebar';
+import { LiveTicker } from '@/components/layout/LiveTicker';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
@@ -37,21 +36,31 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className="bg-luxury-dark text-white">
         <Web3Provider>
-          <ParticleField />
-          <div className="relative z-10 min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
+          <div className="flex h-screen overflow-hidden">
+            {/* Left Sidebar */}
+            <Sidebar />
+            
+            {/* Main Content Area */}
+            <div className="flex-1 flex flex-col overflow-hidden">
+              {/* Live Ticker at top */}
+              <LiveTicker />
+              
+              {/* Scrollable Content */}
+              <main className="flex-1 overflow-y-auto">
+                {children}
+              </main>
+            </div>
           </div>
+          
           <Toaster
             position="bottom-right"
             toastOptions={{
               style: {
                 background: '#1a0000',
                 color: '#fff',
-                border: '2px solid #2a0a0a',
+                border: '2px solid #dc2626',
                 borderRadius: '0px',
                 fontFamily: 'var(--font-inter)',
                 fontWeight: '600',
