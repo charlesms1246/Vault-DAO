@@ -130,6 +130,7 @@ export const FEATURED_DAOS: DAOConfig[] = [
     token: '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2',
     tokenSymbol: 'MKR',
     tokenDecimals: 18,
+    governor: '0x0a3f6849f78076aefaDf113F5BED87720274dDC0', // ADD THIS LINE
     treasury: ['0x9e1585d9CA64243CE43D42f7dD7333190F66Ca09'],
     snapshot: 'vote.makerdao.com',
     chain: CHAINS.MAINNET,

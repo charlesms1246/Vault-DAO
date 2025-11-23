@@ -27,7 +27,13 @@ export function useTreasury(treasuryAddresses: `0x${string}`[], chainId: number 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['treasury', treasuryAddresses, chainId],
     queryFn: async () => {
-      if (!mounted) return null;
+      if (!mounted) return {
+        totalValue: 0,
+        assets: [],
+        change24h: 0,
+        change7d: 0,
+        lastUpdated: Date.now(),
+    };
 
       const client = getPublicClient(chainId);
       const assets: TreasuryAsset[] = [];
@@ -90,8 +96,9 @@ export function useTreasury(treasuryAddresses: `0x${string}`[], chainId: number 
       const prices = await fetchTokenPrices(tokenAddresses);
 
       // Update prices and calculate values
-      assets.forEach((asset) => {
+      assets.forEach(async (asset) => {
         if (asset.symbol !== 'ETH') {
+          const prices = await fetchTokenPrices(tokenAddresses) || {}; // Add fallback
           const priceData = prices[asset.address.toLowerCase()];
           if (priceData) {
             asset.price = priceData.usd;

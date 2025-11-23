@@ -29,12 +29,12 @@ import {
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 
-// Required for static export with dynamic routes
-export function generateStaticParams() {
-  return FEATURED_DAOS.map((dao) => ({
-    dao: dao.id,
-  }));
-}
+// ❌ DELETE THESE LINES (33-37) - REMOVE COMPLETELY
+// export function generateStaticParams() {
+//   return FEATURED_DAOS.map((dao) => ({
+//     dao: dao.id,
+//   }));
+// }
 
 export default function DashboardPage() {
   const params = useParams();
