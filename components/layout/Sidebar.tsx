@@ -10,7 +10,6 @@ import {
   LayoutDashboard,
   Search,
   PlusCircle,
-  TrendingUp,
   Users,
   ChevronLeft,
   ChevronRight,
@@ -35,18 +34,6 @@ const NAV_ITEMS = [
     label: 'Create Dashboard',
     href: '/create',
     icon: PlusCircle,
-  },
-  {
-    id: 'analytics',
-    label: 'Analytics',
-    href: '/analytics',
-    icon: TrendingUp,
-  },
-  {
-    id: 'governance',
-    label: 'Governance',
-    href: '/governance',
-    icon: Users,
   },
 ];
 
