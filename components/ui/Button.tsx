@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react';
 
 interface ButtonProps {
   children?: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  variant?: 'primary' | 'gold' | 'secondary' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
   icon?: React.ReactNode;
@@ -31,19 +31,20 @@ export function Button({
   type = 'button',
   ...props
 }: ButtonProps) {
-  const baseStyles = 'font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2';
+  const baseStyles = 'font-bold rounded-none transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-wider border-2 disabled:opacity-50 disabled:cursor-not-allowed';
   
   const variantStyles = {
-    primary: 'neon-button',
-    secondary: 'bg-cyber-purple hover:bg-cyber-purple-600 text-white',
-    ghost: 'bg-transparent hover:bg-white/10 text-white border border-white/20',
-    danger: 'bg-red-500 hover:bg-red-600 text-white',
+    primary: 'bg-blood-red-500 hover:bg-blood-red-600 text-white border-blood-red-600 shadow-red-glow hover:shadow-red-glow-lg active:scale-95',
+    gold: 'bg-gold-500 hover:bg-gold-600 text-luxury-dark-900 border-gold-600 shadow-gold-glow hover:shadow-gold-glow-lg active:scale-95',
+    secondary: 'bg-transparent hover:bg-blood-red-500/10 text-blood-red-500 border-blood-red-500 hover:border-blood-red-400 active:scale-95',
+    ghost: 'bg-transparent hover:bg-blood-red-500/10 text-white border-blood-red-500/30 hover:border-blood-red-500 active:scale-95',
+    danger: 'bg-blood-red-700 hover:bg-blood-red-800 text-white border-blood-red-800 shadow-red-glow active:scale-95',
   };
 
   const sizeStyles = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
+    sm: 'px-4 py-2 text-xs',
+    md: 'px-6 py-3 text-sm',
+    lg: 'px-8 py-4 text-base',
   };
 
   return (

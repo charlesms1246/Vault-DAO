@@ -19,6 +19,19 @@ import {
   Legend,
 } from 'recharts';
 
+/**
+ * Chart Component - Blood Red + Gold Theme
+ * 
+ * Color Usage Guidelines:
+ * - Treasury Value Over Time: #eab308 (gold) - Use color="#eab308"
+ * - Asset Distribution: Pie chart with red/gold gradient (automatic)
+ * - Token Holder Distribution: #dc2626 (blood red) - Use color="#dc2626"
+ * - Voting Power: #eab308 (gold) bars
+ * - Participation Rate: #dc2626 (blood red) line
+ * - Performance (positive): #22c55e (green)
+ * - Performance (negative): #dc2626 (blood red)
+ */
+
 interface ChartProps {
   data: any[];
   type: 'line' | 'area' | 'bar' | 'pie';
@@ -30,14 +43,14 @@ interface ChartProps {
   showLegend?: boolean;
 }
 
-const COLORS = ['#00d4ff', '#a855f7', '#ec4899', '#10b981', '#f59e0b'];
+const COLORS = ['#dc2626', '#eab308', '#ef4444', '#fbbf24', '#b91c1c', '#ca8a04'];
 
 export function Chart({
   data,
   type,
   dataKey,
   xKey = 'name',
-  color = '#00d4ff',
+  color = '#dc2626',
   height = 300,
   showGrid = true,
   showLegend = false,
@@ -50,9 +63,9 @@ export function Chart({
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="glass rounded-lg p-3 border border-white/20">
-          <p className="text-sm text-gray-300">{payload[0].payload[xKey]}</p>
-          <p className="text-lg font-bold text-cyber-cyan">
+        <div className="bg-luxury-dark-900 border-2 border-blood-red-500 rounded-none p-3 shadow-red-glow backdrop-blur-xl">
+          <p className="text-xs text-gray-400 uppercase tracking-wider font-bold mb-1">{payload[0].payload[xKey]}</p>
+          <p className="text-lg font-bold text-gold-500 font-mono">
             {typeof payload[0].value === 'number'
               ? payload[0].value.toLocaleString()
               : payload[0].value}
@@ -68,10 +81,10 @@ export function Chart({
       {type === 'line' ? (
         <LineChart {...commonProps}>
           {showGrid && (
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(220, 38, 38, 0.1)" />
           )}
-          <XAxis dataKey={xKey} stroke="#666" />
-          <YAxis stroke="#666" />
+          <XAxis dataKey={xKey} stroke="#9ca3af" style={{ fontSize: '12px', fontWeight: 'bold' }} />
+          <YAxis stroke="#9ca3af" style={{ fontSize: '12px', fontWeight: 'bold' }} />
           <RechartsTooltip content={<CustomTooltip />} />
           {showLegend && <Legend />}
           <Line
@@ -86,15 +99,15 @@ export function Chart({
       ) : type === 'area' ? (
         <AreaChart {...commonProps}>
           {showGrid && (
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(220, 38, 38, 0.1)" />
           )}
-          <XAxis dataKey={xKey} stroke="#666" />
-          <YAxis stroke="#666" />
+          <XAxis dataKey={xKey} stroke="#9ca3af" style={{ fontSize: '12px', fontWeight: 'bold' }} />
+          <YAxis stroke="#9ca3af" style={{ fontSize: '12px', fontWeight: 'bold' }} />
           <RechartsTooltip content={<CustomTooltip />} />
-          {showLegend && <Legend />}
+          {showLegend && <Legend wrapperStyle={{ fontWeight: 'bold', color: '#eab308' }} />}
           <defs>
             <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor={color} stopOpacity={0.3} />
+              <stop offset="5%" stopColor={color} stopOpacity={0.4} />
               <stop offset="95%" stopColor={color} stopOpacity={0} />
             </linearGradient>
           </defs>
@@ -109,13 +122,13 @@ export function Chart({
       ) : type === 'bar' ? (
         <BarChart {...commonProps}>
           {showGrid && (
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(220, 38, 38, 0.1)" />
           )}
-          <XAxis dataKey={xKey} stroke="#666" />
-          <YAxis stroke="#666" />
+          <XAxis dataKey={xKey} stroke="#9ca3af" style={{ fontSize: '12px', fontWeight: 'bold' }} />
+          <YAxis stroke="#9ca3af" style={{ fontSize: '12px', fontWeight: 'bold' }} />
           <RechartsTooltip content={<CustomTooltip />} />
-          {showLegend && <Legend />}
-          <Bar dataKey={dataKey} fill={color} radius={[8, 8, 0, 0]} />
+          {showLegend && <Legend wrapperStyle={{ fontWeight: 'bold', color: '#eab308' }} />}
+          <Bar dataKey={dataKey} fill={color} radius={[0, 0, 0, 0]} />
         </BarChart>
       ) : (
         <PieChart>
@@ -123,13 +136,13 @@ export function Chart({
             data={data}
             cx="50%"
             cy="50%"
-            labelLine={false}
+            labelLine={{ stroke: '#eab308', strokeWidth: 1 }}
             label={({ name, percent }: any) =>
               `${name}: ${(percent * 100).toFixed(0)}%`
             }
             outerRadius={100}
-            fill="#8884d8"
             dataKey={dataKey}
+            style={{ fontWeight: 'bold', fontSize: '12px', fill: '#eab308' }}
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

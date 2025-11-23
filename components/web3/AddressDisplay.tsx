@@ -28,17 +28,17 @@ export function AddressDisplay({
 
   return (
     <div className="flex items-center gap-2">
-      <span className="font-mono text-sm">
+      <span className="font-mono text-sm text-gold-500 font-bold">
         {ens || formatAddress(address, chars)}
       </span>
       {showCopy && (
         <Tooltip content={copied ? 'Copied!' : 'Copy address'}>
           <button
             onClick={handleCopy}
-            className="text-gray-400 hover:text-cyber-cyan transition-colors"
+            className="text-gray-400 hover:text-gold-500 transition-colors"
           >
             {copied ? (
-              <Check className="w-4 h-4 text-green-400" />
+              <Check className="w-4 h-4 text-gold-500" />
             ) : (
               <Copy className="w-4 h-4" />
             )}

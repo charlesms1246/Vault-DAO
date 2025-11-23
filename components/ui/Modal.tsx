@@ -48,14 +48,14 @@ export function Modal({
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className={`glass rounded-2xl w-full ${sizeStyles[size]} max-h-[90vh] overflow-hidden flex flex-col`}
+              className={`glass rounded-none border-2 border-blood-red-500 w-full ${sizeStyles[size]} max-h-[90vh] overflow-hidden flex flex-col shadow-red-glow-lg`}
             >
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-white/10">
-                <h2 className="text-2xl font-bold text-white">{title}</h2>
+              <div className="flex items-center justify-between p-6 border-b-2 border-blood-red-500/30 bg-luxury-dark-800">
+                <h2 className="text-2xl font-bold text-white uppercase tracking-wider">{title}</h2>
                 <button
                   onClick={onClose}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-luxury-gray-400 hover:text-blood-red-500 transition-colors border-2 border-blood-red-500/30 hover:border-blood-red-500 p-2"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -68,7 +68,7 @@ export function Modal({
 
               {/* Footer */}
               {footer && (
-                <div className="p-6 border-t border-white/10 flex gap-3 justify-end">
+                <div className="p-6 border-t-2 border-blood-red-500/30 flex gap-3 justify-end bg-luxury-dark-800">
                   {footer}
                 </div>
               )}

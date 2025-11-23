@@ -39,7 +39,7 @@ export function AssetBreakdown({ treasuryAddresses, chainId }: AssetBreakdownPro
 
   return (
     <Card>
-      <h3 className="text-xl font-bold mb-6">Asset Breakdown</h3>
+      <h3 className="text-xl font-bold mb-6 uppercase tracking-wider">Asset Breakdown</h3>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Pie Chart */}
@@ -54,35 +54,36 @@ export function AssetBreakdown({ treasuryAddresses, chainId }: AssetBreakdownPro
 
         {/* Asset List */}
         <div className="space-y-3">
-          {treasury.assets.map((asset, index) => (
-            <div
-              key={`${asset.symbol}-${index}`}
-              className="flex items-center justify-between p-4 glass-hover rounded-lg"
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-3 h-3 rounded-full"
-                  style={{
-                    background: `hsl(${(index * 360) / treasury.assets.length}, 70%, 60%)`,
-                  }}
-                />
-                <div>
-                  <p className="font-medium">{asset.symbol}</p>
-                  <p className="text-sm text-gray-400 font-mono">
-                    {asset.balanceFormatted}
+          {treasury.assets.map((asset, index) => {
+            const colors = ['bg-blood-red-500', 'bg-gold-500', 'bg-blood-red-700', 'bg-gold-700'];
+            const borderColors = ['border-blood-red-500', 'border-gold-500', 'border-blood-red-700', 'border-gold-700'];
+            return (
+              <div
+                key={`${asset.symbol}-${index}`}
+                className="flex items-center justify-between p-4 glass-hover rounded-none border-2 border-luxury-gray-500 hover:border-gold-500 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-3 h-3 rounded-none ${colors[index % colors.length]} border-2 ${borderColors[index % borderColors.length]}`}
+                  />
+                  <div>
+                    <p className="font-bold uppercase tracking-wider">{asset.symbol}</p>
+                    <p className="text-sm text-luxury-gray-400 font-mono">
+                      {asset.balanceFormatted}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-bold number-font text-gold-500">
+                    {formatCurrency(asset.value)}
+                  </p>
+                  <p className="text-sm text-luxury-gray-400">
+                    {formatPercentage(asset.percentage, 1)}
                   </p>
                 </div>
               </div>
-              <div className="text-right">
-                <p className="font-bold number-font">
-                  {formatCurrency(asset.value)}
-                </p>
-                <p className="text-sm text-gray-400">
-                  {formatPercentage(asset.percentage, 1)}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </Card>

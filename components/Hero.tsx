@@ -27,15 +27,15 @@ export function Hero() {
     <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark via-cyber-dark-800 to-cyber-dark" />
+        <div className="absolute inset-0 bg-gradient-to-b from-luxury-dark via-luxury-dark-800 to-luxury-dark" />
         <motion.div
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-20"
           style={{
-            background: 'radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%)',
+            background: 'radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.2) 0%, transparent 50%)',
           }}
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
+            opacity: [0.2, 0.4, 0.2],
           }}
           transition={{
             duration: 8,
@@ -55,9 +55,9 @@ export function Hero() {
             transition={{ delay: 0.2 }}
             className="inline-block mb-6"
           >
-            <div className="glass px-4 py-2 rounded-full border border-cyber-cyan/30 inline-flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse" />
-              <span className="text-sm font-mono text-cyber-cyan">
+            <div className="bg-luxury-dark-800/80 backdrop-blur-xl px-4 py-2 rounded-none border-2 border-gold-500 inline-flex items-center gap-2">
+              <div className="w-2 h-2 rounded-none bg-gold-500 animate-pulse" />
+              <span className="text-sm font-mono text-gold-500 uppercase tracking-wider font-bold">
                 Built for PinMe DeFront Hackathon
               </span>
             </div>
@@ -97,10 +97,10 @@ export function Hero() {
                 key={index}
                 className="flex items-center gap-2 text-gray-300"
               >
-                <div className="w-8 h-8 rounded-lg glass flex items-center justify-center text-cyber-cyan">
+                <div className="w-8 h-8 rounded-none bg-luxury-dark-800 border-2 border-gold-500 flex items-center justify-center text-gold-500">
                   {feature.icon}
                 </div>
-                <span className="font-medium">{feature.text}</span>
+                <span className="font-medium uppercase tracking-wide">{feature.text}</span>
               </div>
             ))}
           </motion.div>
@@ -112,9 +112,9 @@ export function Hero() {
             transition={{ delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <GlowEffect color="#00d4ff" intensity={0.6}>
+            <GlowEffect color="#eab308" intensity={0.8}>
               <Link href="/explore">
-                <Button size="lg" icon={<Flame className="w-5 h-5" />}>
+                <Button variant="gold" size="lg" icon={<Flame className="w-5 h-5" />}>
                   Explore DAOs
                 </Button>
               </Link>
@@ -152,7 +152,7 @@ export function Hero() {
 
       {/* Floating Elements */}
       <motion.div
-        className="absolute top-20 left-10 w-20 h-20 rounded-full bg-cyber-cyan/10 blur-2xl"
+        className="absolute top-20 left-10 w-20 h-20 rounded-none bg-blood-red-500/10 blur-2xl"
         animate={{
           y: [0, 30, 0],
           scale: [1, 1.2, 1],
@@ -164,7 +164,7 @@ export function Hero() {
         }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-cyber-purple/10 blur-2xl"
+        className="absolute bottom-20 right-10 w-32 h-32 rounded-none bg-gold-500/10 blur-2xl"
         animate={{
           y: [0, -30, 0],
           scale: [1, 1.3, 1],

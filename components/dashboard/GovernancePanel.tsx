@@ -56,7 +56,7 @@ export function GovernancePanel({ snapshotSpace }: GovernancePanelProps) {
   return (
     <Card>
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-bold">Active Proposals</h3>
+        <h3 className="text-xl font-bold uppercase tracking-wider">Active Proposals</h3>
         <Badge variant="info">{proposals.length} Active</Badge>
       </div>
 
@@ -69,26 +69,30 @@ export function GovernancePanel({ snapshotSpace }: GovernancePanelProps) {
           return (
             <div
               key={`${proposal.id}-${index}`}
-              className="glass-hover p-5 rounded-lg border border-white/5"
+              className={`glass-hover p-5 rounded-none border-2 transition-all duration-300 ${
+                isActive 
+                  ? 'border-blood-red-500 shadow-red-glow' 
+                  : 'border-luxury-gray-500 hover:border-blood-red-500'
+              }`}
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <h4 className="font-semibold text-lg mb-2 line-clamp-2">
+                  <h4 className="font-bold text-lg mb-2 line-clamp-2 uppercase tracking-wide">
                     {proposal.title}
                   </h4>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
-                    <span className="flex items-center gap-1">
+                  <div className="flex items-center gap-3 text-sm text-luxury-gray-400">
+                    <span className="flex items-center gap-1 font-mono">
                       <VoteIcon className="w-4 h-4" />
                       {proposal.votes} votes
                     </span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1 font-mono">
                       <Clock className="w-4 h-4" />
                       {hasEnded ? 'Ended' : formatTimeAgo(proposal.end * 1000)}
                     </span>
                   </div>
                 </div>
                 <Badge
-                  variant={isActive ? 'success' : 'default'}
+                  variant={isActive ? 'gold' : 'default'}
                   className="shrink-0"
                 >
                   {proposal.state}
@@ -98,21 +102,21 @@ export function GovernancePanel({ snapshotSpace }: GovernancePanelProps) {
               {/* Voting Results */}
               <div className="mb-4">
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-400">Votes Cast</span>
-                  <span className="font-mono font-medium">
+                  <span className="text-luxury-gray-400 uppercase tracking-wider text-xs font-bold">Votes Cast</span>
+                  <span className="font-mono font-medium text-gold-500">
                     {proposal.scores_total.toFixed(0)}
                   </span>
                 </div>
-                <div className="h-2 bg-cyber-dark-700 rounded-full overflow-hidden flex">
+                <div className="h-2 bg-luxury-dark-800 rounded-none overflow-hidden flex border-2 border-blood-red-500/30">
                   {proposal.choices.map((choice, idx) => {
                     const percentage = (proposal.scores[idx] / proposal.scores_total) * 100;
+                    const colors = ['bg-blood-red-500', 'bg-gold-500', 'bg-blood-red-700'];
                     return (
                       <div
                         key={`${choice}-${idx}`}
-                        className="h-full transition-all"
+                        className={`h-full transition-all ${colors[idx % colors.length]}`}
                         style={{
                           width: `${percentage}%`,
-                          background: `hsl(${(idx * 120)}, 70%, 50%)`,
                         }}
                       />
                     );
@@ -123,7 +127,7 @@ export function GovernancePanel({ snapshotSpace }: GovernancePanelProps) {
               {/* Actions */}
               <div className="flex gap-2">
                 <Button
-                  variant="secondary"
+                  variant={hasEnded ? 'ghost' : 'primary'}
                   size="sm"
                   icon={<VoteIcon className="w-4 h-4" />}
                   disabled={hasEnded}

@@ -43,24 +43,27 @@ export function TreasuryOverview({ treasuryAddresses, chainId }: TreasuryOvervie
       value: treasury.totalValue,
       format: 'currency',
       icon: <DollarSign className="w-6 h-6" />,
-      color: 'text-cyber-cyan',
-      bgColor: 'bg-cyber-cyan/10',
+      color: 'text-gold-500',
+      bgColor: 'bg-luxury-dark-900 border-2 border-gold-500',
+      cardVariant: 'glow-gold' as const,
     },
     {
       label: '24h Change',
       value: treasury.change24h,
       format: 'percentage',
       icon: treasury.change24h >= 0 ? <TrendingUp className="w-6 h-6" /> : <TrendingDown className="w-6 h-6" />,
-      color: treasury.change24h >= 0 ? 'text-green-400' : 'text-red-400',
-      bgColor: treasury.change24h >= 0 ? 'bg-green-400/10' : 'bg-red-400/10',
+      color: treasury.change24h >= 0 ? 'text-green-400' : 'text-blood-red-500',
+      bgColor: treasury.change24h >= 0 ? 'bg-luxury-dark-900 border-2 border-green-500' : 'bg-luxury-dark-900 border-2 border-blood-red-500',
+      cardVariant: treasury.change24h >= 0 ? ('default' as const) : ('glow-red' as const),
     },
     {
       label: 'Assets',
       value: treasury.assets.length,
       format: 'number',
       icon: <Wallet className="w-6 h-6" />,
-      color: 'text-cyber-purple',
-      bgColor: 'bg-cyber-purple/10',
+      color: 'text-luxury-gray-400',
+      bgColor: 'bg-luxury-dark-900 border-2 border-luxury-gray-500',
+      cardVariant: 'default' as const,
     },
   ];
 
@@ -73,10 +76,10 @@ export function TreasuryOverview({ treasuryAddresses, chainId }: TreasuryOvervie
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
         >
-          <Card className="h-full">
+          <Card className="h-full" variant={stat.cardVariant}>
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-sm text-gray-400 mb-2">{stat.label}</p>
+                <p className="text-sm text-luxury-gray-400 mb-2 uppercase tracking-wider font-bold">{stat.label}</p>
                 <div className="text-3xl font-bold number-font">
                   {stat.format === 'currency' && (
                     <CountUp
@@ -96,7 +99,7 @@ export function TreasuryOverview({ treasuryAddresses, chainId }: TreasuryOvervie
                   )}
                 </div>
               </div>
-              <div className={`p-3 rounded-lg ${stat.bgColor} ${stat.color}`}>
+              <div className={`p-3 rounded-none ${stat.bgColor} ${stat.color}`}>
                 {stat.icon}
               </div>
             </div>

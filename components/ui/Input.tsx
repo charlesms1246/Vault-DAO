@@ -31,12 +31,12 @@ export function Input({
         )}
         <input
           className={clsx(
-            'w-full bg-cyber-dark-700 border border-white/20 rounded-lg px-4 py-3',
-            'text-white placeholder-gray-500',
-            'focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan',
+            'w-full bg-luxury-dark-800 border-2 border-blood-red-500/30 rounded-none px-4 py-3',
+            'text-white placeholder-luxury-gray-400 uppercase tracking-wide text-sm font-bold',
+            'focus:outline-none focus:border-blood-red-500 focus:shadow-red-glow',
             'transition-all duration-200',
             icon && 'pl-10',
-            error && 'border-red-500 focus:border-red-500 focus:ring-red-500',
+            error && 'border-blood-red-600 focus:border-blood-red-600 focus:shadow-red-glow-lg',
             className
           )}
           {...props}

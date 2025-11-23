@@ -62,35 +62,35 @@ export function ActivityFeed() {
   const getIconColor = (type: string) => {
     switch (type) {
       case 'transaction':
-        return 'text-cyber-cyan bg-cyber-cyan/10';
+        return 'text-gold-500 bg-gold-500/20 border-2 border-gold-500';
       case 'vote':
-        return 'text-cyber-purple bg-cyber-purple/10';
+        return 'text-blood-red-500 bg-blood-red-500/20 border-2 border-blood-red-500';
       case 'proposal':
-        return 'text-cyber-pink bg-cyber-pink/10';
+        return 'text-gold-600 bg-gold-600/20 border-2 border-gold-600';
       case 'delegation':
-        return 'text-green-400 bg-green-400/10';
+        return 'text-blood-red-400 bg-blood-red-400/20 border-2 border-blood-red-400';
       default:
-        return 'text-gray-400 bg-gray-400/10';
+        return 'text-luxury-gray-400 bg-luxury-gray-400/20 border-2 border-luxury-gray-400';
     }
   };
 
   return (
     <Card>
-      <h3 className="text-xl font-bold mb-6">Recent Activity</h3>
+      <h3 className="text-xl font-bold mb-6 uppercase tracking-wider">Recent Activity</h3>
 
       <div className="space-y-4">
         {mockActivity.map((activity) => (
           <div
             key={activity.id}
-            className="flex gap-4 p-4 glass-hover rounded-lg"
+            className="flex gap-4 p-4 glass-hover rounded-none border-2 border-luxury-gray-500 hover:border-gold-500 transition-all duration-300"
           >
-            <div className={`shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${getIconColor(activity.type)}`}>
+            <div className={`shrink-0 w-12 h-12 rounded-none flex items-center justify-center ${getIconColor(activity.type)}`}>
               {getIcon(activity.type)}
             </div>
 
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-2 mb-1">
-                <h4 className="font-semibold">{activity.title}</h4>
+                <h4 className="font-bold uppercase tracking-wide">{activity.title}</h4>
                 {activity.status && (
                   <Badge
                     variant={activity.status === 'success' ? 'success' : 'danger'}
@@ -101,18 +101,18 @@ export function ActivityFeed() {
                 )}
               </div>
               
-              <p className="text-sm text-gray-400 mb-2">
+              <p className="text-sm text-luxury-gray-400 mb-2">
                 {activity.description}
               </p>
 
-              <div className="flex items-center gap-4 text-xs text-gray-500">
+              <div className="flex items-center gap-4 text-xs text-luxury-gray-400 font-mono">
                 <AddressDisplay address={activity.actor} chars={3} showCopy={false} />
                 <span>•</span>
                 <span>{formatTimeAgo(activity.timestamp)}</span>
                 {activity.value && (
                   <>
                     <span>•</span>
-                    <span className="font-mono font-medium text-cyber-cyan">
+                    <span className="font-mono font-bold text-gold-500">
                       {activity.value}
                     </span>
                   </>
@@ -120,14 +120,14 @@ export function ActivityFeed() {
               </div>
             </div>
 
-            <button className="shrink-0 text-gray-400 hover:text-white transition-colors">
+            <button className="shrink-0 text-luxury-gray-400 hover:text-gold-500 transition-colors">
               <ExternalLink className="w-4 h-4" />
             </button>
           </div>
         ))}
       </div>
 
-      <button className="w-full mt-4 py-2 text-sm text-gray-400 hover:text-white transition-colors">
+      <button className="w-full mt-4 py-2 text-sm text-luxury-gray-400 hover:text-gold-500 transition-colors font-bold uppercase tracking-wider border-2 border-luxury-gray-500 hover:border-gold-500 rounded-none">
         View All Activity →
       </button>
     </Card>

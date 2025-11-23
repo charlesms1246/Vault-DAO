@@ -29,7 +29,7 @@ export function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-40 glass border-b border-white/10"
+        className="fixed top-0 left-0 right-0 z-40 bg-luxury-dark-900/80 backdrop-blur-xl border-b-2 border-luxury-gray-500"
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -38,13 +38,13 @@ export function Navbar() {
               <motion.div
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
-                className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-cyan via-cyber-purple to-cyber-pink flex items-center justify-center"
+                className="w-10 h-10 rounded-none bg-gradient-to-br from-blood-red-500 to-gold-500 flex items-center justify-center border-2 border-gold-500 shadow-red-glow"
               >
                 <Flame className="w-6 h-6 text-white" />
               </motion.div>
               <div>
-                <h1 className="text-xl font-bold gradient-text">Vault DAO</h1>
-                <p className="text-xs text-gray-500 font-mono">Eternal Governance</p>
+                <h1 className="text-xl font-bold gradient-text uppercase tracking-wider">Vault DAO</h1>
+                <p className="text-xs text-luxury-gray-400 font-mono uppercase tracking-wider">Eternal Governance</p>
               </div>
             </Link>
 
@@ -59,8 +59,8 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     className={clsx(
-                      'flex items-center gap-2 font-medium transition-colors relative py-2',
-                      isActive ? 'text-cyber-cyan' : 'text-gray-400 hover:text-white'
+                      'flex items-center gap-2 font-bold uppercase tracking-wider transition-colors relative py-2 text-sm',
+                      isActive ? 'text-gold-500' : 'text-luxury-gray-400 hover:text-white'
                     )}
                   >
                     {item.icon}
@@ -68,7 +68,7 @@ export function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeNav"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyber-cyan"
+                        className="absolute bottom-0 left-0 right-0 h-1 bg-gold-500 shadow-gold-glow"
                         initial={false}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                       />
@@ -84,7 +84,7 @@ export function Navbar() {
                 href="https://github.com/charlesms-eth/vault-dao"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-luxury-gray-400 hover:text-gold-500 transition-colors"
               >
                 <Github className="w-5 h-5" />
               </Link>
@@ -94,7 +94,7 @@ export function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-gray-400 hover:text-white transition-colors"
+              className="md:hidden text-luxury-gray-400 hover:text-white transition-colors"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -119,7 +119,7 @@ export function Navbar() {
             />
 
             {/* Menu Panel */}
-            <div className="absolute right-0 top-0 bottom-0 w-80 max-w-full glass border-l border-white/10 p-6">
+            <div className="absolute right-0 top-0 bottom-0 w-80 max-w-full bg-luxury-dark-900 border-l-2 border-luxury-gray-500 p-6">
               <div className="flex flex-col gap-6 mt-16">
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
@@ -129,20 +129,20 @@ export function Navbar() {
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={clsx(
-                        'flex items-center gap-3 p-4 rounded-lg transition-colors',
+                        'flex items-center gap-3 p-4 rounded-none transition-colors border-2 uppercase tracking-wider font-bold text-sm',
                         isActive
-                          ? 'bg-cyber-cyan/20 text-cyber-cyan'
-                          : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                          ? 'bg-blood-red-500/20 text-gold-500 border-blood-red-500'
+                          : 'text-luxury-gray-400 hover:bg-blood-red-500/10 hover:text-white border-blood-red-500/20'
                       )}
                     >
                       {item.icon}
-                      <span className="font-medium">{item.label}</span>
+                      <span>{item.label}</span>
                     </Link>
                   );
                 })}
 
                 {mounted && (
-                  <div className="mt-4 pt-6 border-t border-white/10">
+                  <div className="mt-4 pt-6 border-t-2 border-luxury-gray-500">
                     <ConnectButton />
                   </div>
                 )}
@@ -151,7 +151,7 @@ export function Navbar() {
                   href="https://github.com/charlesms-eth/vault-dao"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-luxury-gray-400 hover:text-gold-500 transition-colors uppercase tracking-wider text-sm font-bold"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Github className="w-5 h-5" />

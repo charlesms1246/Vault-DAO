@@ -98,7 +98,7 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
     <PageTransition>
       <div className="min-h-screen pb-20">
         {/* Header */}
-        <div className="border-b border-white/10 bg-cyber-dark-800/50 backdrop-blur-xl">
+        <div className="border-b-2 border-blood-red-500/30 bg-luxury-dark-800/90 backdrop-blur-xl">
           <div className="container mx-auto px-4 py-8">
             <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
               {/* DAO Info */}
@@ -107,24 +107,24 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200 }}
-                  className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyber-cyan via-cyber-purple to-cyber-pink flex items-center justify-center shrink-0"
+                  className="w-20 h-20 rounded-none bg-luxury-dark-900 flex items-center justify-center shrink-0 border-4 border-blood-red-500 shadow-red-glow-lg"
                 >
-                  <Flame className="w-10 h-10 text-white" />
+                  <Flame className="w-10 h-10 text-gold-500" style={{ filter: 'drop-shadow(0 0 8px rgba(234, 179, 8, 0.8))' }} />
                 </motion.div>
 
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <h1 className="text-3xl md:text-4xl font-bold">{dao.name}</h1>
-                    <Badge variant="info">{CHAIN_NAMES[dao.chain] || 'Unknown'}</Badge>
+                    <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-wider gradient-text">{dao.name}</h1>
+                    <Badge variant="gold">{CHAIN_NAMES[dao.chain] || 'Unknown'}</Badge>
                   </div>
-                  <p className="text-gray-400 mb-4 max-w-2xl">{dao.description}</p>
+                  <p className="text-luxury-gray-300 mb-4 max-w-2xl">{dao.description}</p>
                   
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {dao.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 text-sm rounded-full bg-white/5 border border-white/10 text-gray-400"
+                        className="px-3 py-1 text-xs rounded-none bg-luxury-dark-900 border-2 border-luxury-gray-500 text-luxury-gray-300 uppercase tracking-wider font-bold hover:border-gold-500 hover:text-gold-500 transition-all duration-300 cursor-default"
                       >
                         {tag}
                       </span>
@@ -138,7 +138,7 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
                         href={dao.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-cyber-cyan transition-colors"
+                        className="text-luxury-gray-400 hover:text-gold-500 transition-all duration-300 hover:scale-110"
                       >
                         <Globe className="w-5 h-5" />
                       </a>
@@ -148,7 +148,7 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
                         href={`https://twitter.com/${dao.twitter}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-cyber-cyan transition-colors"
+                        className="text-luxury-gray-400 hover:text-gold-500 transition-all duration-300 hover:scale-110"
                       >
                         <Twitter className="w-5 h-5" />
                       </a>
@@ -158,7 +158,7 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
                         href={dao.discord}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-cyber-cyan transition-colors"
+                        className="text-luxury-gray-400 hover:text-gold-500 transition-all duration-300 hover:scale-110"
                       >
                         <MessageCircle className="w-5 h-5" />
                       </a>
@@ -170,10 +170,10 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
               {/* Actions */}
               <div className="flex flex-wrap gap-3">
                 <Button
-                  variant="ghost"
+                  variant="gold"
                   size="sm"
                   onClick={handleFavorite}
-                  icon={<Star className={`w-4 h-4 ${isFavorite ? 'fill-current text-yellow-400' : ''}`} />}
+                  icon={<Star className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />}
                 >
                   {isFavorite ? 'Favorited' : 'Favorite'}
                 </Button>
@@ -260,13 +260,13 @@ export function DashboardClient({ daoId }: DashboardClientProps) {
                       <h3 className="text-xl font-bold mb-4">Distribution Analysis</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <h4 className="font-semibold mb-2">Gini Coefficient</h4>
+                          <h4 className="font-bold mb-2 uppercase tracking-wider">Gini Coefficient</h4>
                           <p className="text-sm text-gray-400">
                             Measures wealth distribution inequality. Lower is more equal distribution (0 = perfect equality, 1 = maximum inequality).
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Concentration Risk</h4>
+                          <h4 className="font-bold mb-2 uppercase tracking-wider">Concentration Risk</h4>
                           <p className="text-sm text-gray-400">
                             High concentration in top holders can indicate centralization risk for governance decisions.
                           </p>

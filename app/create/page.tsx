@@ -171,16 +171,16 @@ export default function CreatePage() {
                 <React.Fragment key={s}>
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
+                      className={`w-10 h-10 rounded-none flex items-center justify-center font-bold transition-all border-2 ${
                         step >= s
-                          ? 'bg-cyber-cyan text-cyber-dark'
-                          : 'bg-white/5 text-gray-500'
+                          ? 'bg-gold-500 text-luxury-dark border-gold-500 shadow-gold-glow'
+                          : 'bg-luxury-dark-800 text-gray-500 border-luxury-gray-500'
                       }`}
                     >
                       {step > s ? <CheckCircle className="w-6 h-6" /> : s}
                     </div>
                     <div className="hidden md:block">
-                      <p className="font-semibold">
+                      <p className="font-bold uppercase tracking-wider">
                         {s === 1 && 'Basic Info'}
                         {s === 2 && 'Contracts'}
                         {s === 3 && 'Optional'}
@@ -193,9 +193,9 @@ export default function CreatePage() {
                     </div>
                   </div>
                   {s < 3 && (
-                    <div className="flex-1 h-0.5 bg-white/10 mx-4">
+                    <div className="flex-1 h-0.5 bg-luxury-gray-500 mx-4">
                       <motion.div
-                        className="h-full bg-cyber-cyan"
+                        className="h-full bg-gold-500"
                         initial={{ width: 0 }}
                         animate={{ width: step > s ? '100%' : '0%' }}
                         transition={{ duration: 0.3 }}
@@ -219,7 +219,7 @@ export default function CreatePage() {
                   className="space-y-6"
                 >
                   <div>
-                    <h2 className="text-2xl font-bold mb-2">Basic Information</h2>
+                    <h2 className="text-2xl font-bold mb-2 uppercase tracking-wider">Basic Information</h2>
                     <p className="text-gray-400">Tell us about your DAO</p>
                   </div>
 
@@ -232,11 +232,11 @@ export default function CreatePage() {
                   />
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2 uppercase tracking-wider">
                       Description
                     </label>
                     <textarea
-                      className="w-full bg-cyber-dark-700 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-all duration-200"
+                      className="w-full bg-luxury-dark-800 border-2 border-luxury-gray-500 rounded-none px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all duration-200"
                       placeholder="Brief description of your DAO..."
                       rows={4}
                       value={formData.description}
@@ -264,11 +264,11 @@ export default function CreatePage() {
                   />
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2 uppercase tracking-wider">
                       Chain
                     </label>
                     <select
-                      className="w-full bg-cyber-dark-700 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan"
+                      className="w-full bg-luxury-dark-800 border-2 border-luxury-gray-500 rounded-none px-4 py-3 text-white focus:outline-none focus:border-gold-500 uppercase tracking-wider font-bold"
                       value={formData.chain}
                       onChange={(e) => setFormData({ ...formData, chain: Number(e.target.value) })}
                     >
@@ -291,7 +291,7 @@ export default function CreatePage() {
                   className="space-y-6"
                 >
                   <div>
-                    <h2 className="text-2xl font-bold mb-2">Smart Contracts</h2>
+                    <h2 className="text-2xl font-bold mb-2 uppercase tracking-wider">Smart Contracts</h2>
                     <p className="text-gray-400">Configure treasury and governance contracts</p>
                   </div>
 
@@ -341,7 +341,7 @@ export default function CreatePage() {
                   className="space-y-6"
                 >
                   <div>
-                    <h2 className="text-2xl font-bold mb-2">Social & Links</h2>
+                    <h2 className="text-2xl font-bold mb-2 uppercase tracking-wider">Social & Links</h2>
                     <p className="text-gray-400">Add social links and external resources</p>
                   </div>
 
@@ -366,23 +366,23 @@ export default function CreatePage() {
                     onChange={(e) => setFormData({ ...formData, discord: e.target.value })}
                   />
 
-                  <div className="pt-6 border-t border-white/10">
-                    <h3 className="font-semibold mb-4">Review Configuration</h3>
-                    <div className="glass p-4 rounded-lg space-y-2 text-sm">
+                  <div className="pt-6 border-t-2 border-luxury-gray-500">
+                    <h3 className="font-bold mb-4 uppercase tracking-wider">Review Configuration</h3>
+                    <div className="bg-luxury-dark-800 border-2 border-luxury-gray-500 p-4 rounded-none space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-gray-400">DAO Name:</span>
+                        <span className="text-gray-400 uppercase tracking-wider">DAO Name:</span>
                         <span className="font-medium">{formData.name}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Token:</span>
+                        <span className="text-gray-400 uppercase tracking-wider">Token:</span>
                         <span className="font-mono text-xs">{formData.tokenSymbol}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Chain:</span>
+                        <span className="text-gray-400 uppercase tracking-wider">Chain:</span>
                         <span>{CHAIN_NAMES[formData.chain]}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Treasury Addresses:</span>
+                        <span className="text-gray-400 uppercase tracking-wider">Treasury Addresses:</span>
                         <span>{formData.treasuryAddresses.split(',').length}</span>
                       </div>
                     </div>
@@ -391,7 +391,7 @@ export default function CreatePage() {
               )}
 
               {/* Actions */}
-              <div className="flex gap-3 mt-8 pt-6 border-t border-white/10">
+              <div className="flex gap-3 mt-8 pt-6 border-t-2 border-luxury-gray-500">
                 {step > 1 && (
                   <Button
                     variant="ghost"
@@ -402,11 +402,11 @@ export default function CreatePage() {
                 )}
                 <div className="flex-1" />
                 {step < 3 ? (
-                  <Button onClick={handleNext}>
+                  <Button variant="gold" onClick={handleNext}>
                     Continue
                   </Button>
                 ) : (
-                  <Button onClick={handleSubmit} icon={<Rocket className="w-5 h-5" />}>
+                  <Button variant="gold" onClick={handleSubmit} icon={<Rocket className="w-5 h-5" />}>
                     Create Dashboard
                   </Button>
                 )}
@@ -415,15 +415,15 @@ export default function CreatePage() {
           </Card>
 
           {/* Info Card */}
-          <Card className="mt-8 bg-cyber-cyan/5 border-cyber-cyan/30">
+          <Card className="mt-8 bg-blood-red-500/5 border-2 border-blood-red-500/30">
             <div className="flex gap-4">
               <div className="shrink-0">
-                <div className="w-10 h-10 rounded-lg bg-cyber-cyan/20 flex items-center justify-center">
-                  <Info className="w-5 h-5 text-cyber-cyan" />
+                <div className="w-10 h-10 rounded-none bg-blood-red-500/20 border-2 border-blood-red-500 flex items-center justify-center">
+                  <Info className="w-5 h-5 text-blood-red-500" />
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">After Creation</h3>
+                <h3 className="font-bold mb-2 uppercase tracking-wider">After Creation</h3>
                 <p className="text-sm text-gray-400">
                   Your dashboard configuration will be saved locally. To deploy it permanently on IPFS, 
                   you'll need to build the project and use PinMe to upload the static files.
@@ -440,34 +440,34 @@ export default function CreatePage() {
         onClose={() => setShowSuccessModal(false)}
         title="Dashboard Created! 🎉"
       >
-        <div className="space-y-6">
+          <div className="space-y-6">
           <div className="text-center">
-            <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="w-10 h-10 text-green-400" />
+            <div className="w-20 h-20 rounded-none bg-gold-500/20 border-4 border-gold-500 flex items-center justify-center mx-auto mb-4 shadow-gold-glow">
+              <CheckCircle className="w-10 h-10 text-gold-500" />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Success!</h3>
+            <h3 className="text-2xl font-bold mb-2 uppercase tracking-wider">Success!</h3>
             <p className="text-gray-400">
               Your DAO dashboard has been created and saved locally.
             </p>
           </div>
 
-          <Card className="bg-cyber-dark-800">
-            <h4 className="font-semibold mb-3">Next Steps:</h4>
+          <Card className="bg-luxury-dark-800 border-2 border-luxury-gray-500">
+            <h4 className="font-bold mb-3 uppercase tracking-wider">Next Steps:</h4>
             <ol className="space-y-3 text-sm text-gray-400">
               <li className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 rounded-full bg-cyber-cyan/20 text-cyber-cyan flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 rounded-none bg-gold-500/20 text-gold-500 border-2 border-gold-500 flex items-center justify-center text-xs font-bold">
                   1
                 </span>
                 <span>View your dashboard to ensure everything looks correct</span>
               </li>
               <li className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 rounded-full bg-cyber-cyan/20 text-cyber-cyan flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 rounded-none bg-gold-500/20 text-gold-500 border-2 border-gold-500 flex items-center justify-center text-xs font-bold">
                   2
                 </span>
                 <span>Build the static site for deployment</span>
               </li>
               <li className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 rounded-full bg-cyber-cyan/20 text-cyber-cyan flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 rounded-none bg-gold-500/20 text-gold-500 border-2 border-gold-500 flex items-center justify-center text-xs font-bold">
                   3
                 </span>
                 <span>Deploy to IPFS using PinMe</span>
@@ -475,23 +475,21 @@ export default function CreatePage() {
             </ol>
           </Card>
 
-          <div className="glass p-4 rounded-lg">
-            <p className="text-sm text-gray-400 mb-2">Deploy Command:</p>
+          <div className="bg-luxury-dark-800 border-2 border-luxury-gray-500 p-4 rounded-none">
+            <p className="text-sm text-gray-400 mb-2 uppercase tracking-wider">Deploy Command:</p>
             <div className="flex items-center gap-2">
-              <code className="flex-1 bg-cyber-dark-800 px-3 py-2 rounded text-cyber-cyan text-sm font-mono">
+              <code className="flex-1 bg-luxury-dark px-3 py-2 rounded-none text-gold-500 text-sm font-mono border-2 border-luxury-gray-500">
                 npm run build && pinme upload ./out
               </code>
               <button
                 onClick={handleCopyDeployCommand}
-                className="p-2 glass-hover rounded"
+                className="p-2 bg-luxury-dark-800 hover:bg-blood-red-500/10 border-2 border-luxury-gray-500 hover:border-gold-500 rounded-none transition-colors"
               >
                 <Copy className="w-4 h-4" />
               </button>
             </div>
           </div>
-        </div>
-
-        <div className="flex gap-3 mt-6">
+        </div>        <div className="flex gap-3 mt-6">
           <Button
             variant="secondary"
             onClick={() => {
@@ -503,6 +501,7 @@ export default function CreatePage() {
             Browse DAOs
           </Button>
           <Button
+            variant="gold"
             onClick={() => {
               setShowSuccessModal(false);
               router.push(`/dashboard/${generatedId}`);

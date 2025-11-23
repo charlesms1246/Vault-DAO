@@ -34,11 +34,13 @@ export function Web3Provider({ children }: Web3ProviderProps) {
         {mounted ? (
           <RainbowKitProvider
             theme={darkTheme({
-              accentColor: '#00d4ff',
-              accentColorForeground: '#0a0a0f',
-              borderRadius: 'medium',
+              accentColor: '#dc2626',
+              accentColorForeground: '#fbbf24',
+              borderRadius: 'none',
               fontStack: 'system',
+              overlayBlur: 'small',
             })}
+            modalSize="compact"
           >
             {children}
           </RainbowKitProvider>

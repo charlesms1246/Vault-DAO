@@ -25,37 +25,37 @@ const features = [
     icon: <Shield className="w-6 h-6" />,
     title: 'Censorship Resistant',
     description: 'Deployed on IPFS, your dashboard can never be taken down or blocked.',
-    color: 'from-cyber-cyan to-blue-500',
+    color: 'from-blood-red-500 to-blood-red-600',
   },
   {
     icon: <Zap className="w-6 h-6" />,
     title: 'Real-time Data',
     description: 'Live treasury balances, proposals, and token analytics fetched on-chain.',
-    color: 'from-cyber-purple to-purple-500',
+    color: 'from-gold-500 to-gold-600',
   },
   {
     icon: <Globe className="w-6 h-6" />,
     title: 'ENS Powered',
     description: 'Human-readable domains via ENS with automatic contenthash records.',
-    color: 'from-cyber-pink to-pink-500',
+    color: 'from-blood-red-400 to-blood-red-500',
   },
   {
     icon: <Lock className="w-6 h-6" />,
     title: 'Zero Custody',
     description: 'Read-only interface. Your treasury funds remain completely secure.',
-    color: 'from-green-400 to-emerald-500',
+    color: 'from-gold-400 to-gold-500',
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
     title: 'Treasury Analytics',
     description: 'Asset breakdown, historical value charts, and portfolio insights.',
-    color: 'from-yellow-400 to-orange-500',
+    color: 'from-blood-red-500 to-gold-500',
   },
   {
     icon: <Users className="w-6 h-6" />,
     title: 'Token Distribution',
     description: 'Holder analytics, concentration metrics, and governance insights.',
-    color: 'from-red-400 to-rose-500',
+    color: 'from-gold-500 to-blood-red-500',
   },
 ];
 
@@ -100,11 +100,11 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card hover className="h-full">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4`}>
+                <Card variant="luxury" hover className="h-full">
+                  <div className={`w-12 h-12 rounded-none bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 border-2 border-white/20`}>
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-bold mb-2 uppercase tracking-wider">{feature.title}</h3>
                   <p className="text-gray-400">{feature.description}</p>
                 </Card>
               </motion.div>
@@ -114,7 +114,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured DAOs */}
-      <section className="py-20 bg-gradient-to-b from-transparent to-cyber-dark-800">
+      <section className="py-20 bg-gradient-to-b from-transparent to-luxury-dark-800">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -142,11 +142,11 @@ export default function HomePage() {
                 <Link href={`/dashboard/${dao.id}`}>
                   <Card hover className="h-full">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-purple flex items-center justify-center">
-                        <Flame className="w-8 h-8" />
+                      <div className="w-16 h-16 rounded-none bg-luxury-dark-800 border-4 border-blood-red-500 flex items-center justify-center shadow-red-glow">
+                        <Flame className="w-8 h-8 text-gold-500" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold">{dao.name}</h3>
+                        <h3 className="text-xl font-bold uppercase tracking-wider">{dao.name}</h3>
                         <p className="text-sm text-gray-400 font-mono">
                           {dao.tokenSymbol}
                         </p>
@@ -159,7 +159,7 @@ export default function HomePage() {
                       {dao.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-gray-400"
+                          className="px-2 py-1 text-xs rounded-none bg-luxury-dark-800 border-2 border-luxury-gray-500 text-gray-400 hover:border-gold-500 transition-colors uppercase tracking-wider font-bold"
                         >
                           {tag}
                         </span>
@@ -206,8 +206,8 @@ export default function HomePage() {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <div className="w-6 h-6 rounded-full bg-cyber-cyan/20 flex items-center justify-center shrink-0">
-                      <CheckCircle className="w-4 h-4 text-cyber-cyan" />
+                    <div className="w-6 h-6 rounded-none bg-blood-red-500/20 border-2 border-blood-red-500 flex items-center justify-center shrink-0">
+                      <CheckCircle className="w-4 h-4 text-blood-red-500" />
                     </div>
                     <span className="text-gray-300">{benefit}</span>
                   </motion.div>
@@ -221,30 +221,30 @@ export default function HomePage() {
               viewport={{ once: true }}
               className="relative"
             >
-              <Card gradient glow className="p-8">
+              <Card variant="glow-gold" className="p-8">
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-cyber-cyan/20 flex items-center justify-center">
-                      <Shield className="w-6 h-6 text-cyber-cyan" />
+                    <div className="w-12 h-12 rounded-none bg-gold-500/20 border-2 border-gold-500 flex items-center justify-center">
+                      <Shield className="w-6 h-6 text-gold-500" />
                     </div>
                     <div>
-                      <h4 className="font-bold">Deployed via PinMe</h4>
+                      <h4 className="font-bold uppercase tracking-wider">Deployed via PinMe</h4>
                       <p className="text-sm text-gray-400">One command deployment</p>
                     </div>
                   </div>
-                  <div className="glass p-4 rounded-lg font-mono text-sm">
+                  <div className="bg-luxury-dark-800/50 border-2 border-luxury-gray-500 p-4 rounded-none font-mono text-sm">
                     <div className="text-gray-500 mb-2"># Build and deploy</div>
-                    <div className="text-cyber-cyan">$ npm run build</div>
-                    <div className="text-cyber-cyan">$ pinme upload ./out</div>
+                    <div className="text-gold-500">$ npm run build</div>
+                    <div className="text-gold-500">$ pinme upload ./out</div>
                     <div className="mt-4 text-gray-500">✓ Deployed to IPFS</div>
                     <div className="text-gray-500">✓ ENS contenthash set</div>
                     <div className="text-gray-500">✓ Gateway URL active</div>
                   </div>
-                  <div className="pt-4 border-t border-white/10">
+                  <div className="pt-4 border-t-2 border-luxury-gray-500">
                     <p className="text-sm text-gray-400">
                       Your dashboard lives forever at:
                     </p>
-                    <p className="font-mono text-cyber-cyan text-sm mt-2">
+                    <p className="font-mono text-gold-500 text-sm mt-2">
                       https://your-dao.pinme.eth.limo
                     </p>
                   </div>
@@ -257,7 +257,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyber-cyan/10 via-cyber-purple/10 to-cyber-pink/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blood-red-500/10 via-gold-500/10 to-blood-red-500/10" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -275,7 +275,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/create">
-                <Button size="lg" icon={<Flame className="w-5 h-5" />}>
+                <Button variant="gold" size="lg" icon={<Flame className="w-5 h-5" />}>
                   Create Dashboard
                 </Button>
               </Link>

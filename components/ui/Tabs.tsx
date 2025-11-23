@@ -29,23 +29,23 @@ export function Tabs({ tabs, defaultTab, onChange, children }: TabsProps) {
   return (
     <div className="w-full">
       {/* Tab Headers */}
-      <div className="flex gap-2 border-b border-white/10 mb-6 overflow-x-auto">
+      <div className="flex gap-2 border-b-2 border-blood-red-500/30 mb-6 overflow-x-auto">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
             className={clsx(
-              'relative px-6 py-3 font-medium transition-all duration-200',
-              'flex items-center gap-2 whitespace-nowrap',
+              'relative px-6 py-3 font-bold uppercase tracking-wider transition-all duration-200',
+              'flex items-center gap-2 whitespace-nowrap border-2 rounded-none',
               activeTab === tab.id
-                ? 'text-cyber-cyan'
-                : 'text-gray-400 hover:text-white'
+                ? 'text-gold-500 border-blood-red-500 bg-blood-red-500/10'
+                : 'text-luxury-gray-400 hover:text-white border-transparent hover:border-blood-red-500/30'
             )}
           >
             {tab.icon}
             <span>{tab.label}</span>
             {tab.count !== undefined && (
-              <span className="ml-1 px-2 py-0.5 text-xs rounded-full bg-white/10">
+              <span className="ml-1 px-2 py-0.5 text-xs rounded-none bg-blood-red-500/20 border border-blood-red-500/50">
                 {tab.count}
               </span>
             )}
@@ -54,7 +54,7 @@ export function Tabs({ tabs, defaultTab, onChange, children }: TabsProps) {
             {activeTab === tab.id && (
               <motion.div
                 layoutId="activeTab"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyber-cyan"
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gold-500 shadow-gold-glow"
                 initial={false}
                 transition={{ type: 'spring', stiffness: 500, damping: 30 }}
               />

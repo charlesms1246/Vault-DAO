@@ -50,6 +50,7 @@ export function ConnectButton() {
                 return (
                   <Button
                     onClick={openConnectModal}
+                    variant="primary"
                     icon={<Wallet className="w-4 h-4" />}
                   >
                     Connect Wallet
@@ -78,7 +79,7 @@ export function ConnectButton() {
                           background: chain.iconBackground,
                           width: 16,
                           height: 16,
-                          borderRadius: 999,
+                          borderRadius: 0,
                           overflow: 'hidden',
                           marginRight: 4,
                         }}
@@ -95,8 +96,9 @@ export function ConnectButton() {
 
                   <Button
                     onClick={openAccountModal}
-                    variant="secondary"
+                    variant="gold"
                     size="sm"
+                    className="font-mono border-2 border-gold-500 shadow-gold-glow"
                   >
                     {account.displayName}
                   </Button>

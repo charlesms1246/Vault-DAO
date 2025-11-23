@@ -32,14 +32,14 @@ export function ParticleField() {
     window.addEventListener('resize', resize);
 
     // Create particles
-    const particleCount = 50;
+    const particleCount = 40;
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      radius: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.5 + 0.2,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      radius: Math.random() * 1.5 + 0.5,
+      opacity: Math.random() * 0.3 + 0.1,
     }));
 
     // Animation loop
@@ -60,8 +60,11 @@ export function ParticleField() {
         // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 212, 255, ${particle.opacity})`;
+        ctx.fillStyle = `rgba(220, 38, 38, ${particle.opacity})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'rgba(220, 38, 38, 0.5)';
         ctx.fill();
+        ctx.shadowBlur = 0;
 
         // Draw connections
         particlesRef.current.slice(i + 1).forEach((otherParticle) => {
@@ -73,7 +76,7 @@ export function ParticleField() {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(0, 212, 255, ${0.2 * (1 - distance / 150)})`;
+            ctx.strokeStyle = `rgba(220, 38, 38, ${0.15 * (1 - distance / 150)})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -97,7 +100,7 @@ export function ParticleField() {
     <canvas
       ref={canvasRef}
       id="particle-canvas"
-      className="fixed inset-0 pointer-events-none"
+      className="fixed inset-0 pointer-events-none opacity-20"
     />
   );
 }

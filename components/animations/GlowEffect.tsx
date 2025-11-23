@@ -11,8 +11,8 @@ interface GlowEffectProps {
 
 export function GlowEffect({ 
   children, 
-  color = '#00d4ff', 
-  intensity = 0.5 
+  color = '#eab308', 
+  intensity = 0.8 
 }: GlowEffectProps) {
   return (
     <motion.div
@@ -21,7 +21,7 @@ export function GlowEffect({
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <motion.div
-        className="absolute inset-0 rounded-lg blur-xl"
+        className="absolute inset-0 rounded-none blur-xl"
         style={{
           background: color,
           opacity: intensity,

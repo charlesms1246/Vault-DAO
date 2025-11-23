@@ -118,7 +118,7 @@ export default function ExplorePage() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as 'name' | 'popular')}
-                    className="w-full bg-cyber-dark-700 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan"
+                    className="w-full bg-luxury-dark-800 border-2 border-luxury-gray-500 rounded-none px-4 py-3 text-white focus:outline-none focus:border-gold-500 uppercase tracking-wider font-bold"
                   >
                     <option value="popular">Most Popular</option>
                     <option value="name">Alphabetical</option>
@@ -138,10 +138,10 @@ export default function ExplorePage() {
               </div>
 
               {/* Tags */}
-              <div className="mt-6 pt-6 border-t border-white/10">
+              <div className="mt-6 pt-6 border-t-2 border-luxury-gray-500">
                 <div className="flex items-center gap-2 mb-3">
                   <Filter className="w-4 h-4 text-gray-400" />
-                  <span className="text-sm text-gray-400 font-medium">Filter by category:</span>
+                  <span className="text-sm text-gray-400 font-medium uppercase tracking-wider">Filter by category:</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {allTags.map((tag) => (
@@ -149,10 +149,10 @@ export default function ExplorePage() {
                       key={tag}
                       onClick={() => toggleTag(tag)}
                       className={clsx(
-                        'px-4 py-2 rounded-lg font-medium transition-all text-sm',
+                        'px-4 py-2 rounded-none font-medium transition-all text-sm border-2 uppercase tracking-wider font-bold',
                         selectedTags.includes(tag)
-                          ? 'bg-cyber-cyan text-cyber-dark'
-                          : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
+                          ? 'bg-gold-500/20 text-gold-500 border-gold-500 shadow-gold-glow'
+                          : 'bg-luxury-dark-800 text-gray-400 hover:bg-blood-red-500/10 hover:text-white border-luxury-gray-500 hover:border-blood-red-500'
                       )}
                     >
                       {tag}
@@ -166,24 +166,24 @@ export default function ExplorePage() {
           {/* Results Count */}
           <div className="mb-6">
             <p className="text-gray-400">
-              Showing <span className="text-white font-semibold">{filteredDAOs.length}</span> of{' '}
-              <span className="text-white font-semibold">{FEATURED_DAOS.length}</span> DAOs
+              Showing <span className="text-white font-bold">{filteredDAOs.length}</span> of{' '}
+              <span className="text-white font-bold">{FEATURED_DAOS.length}</span> DAOs
               {searchQuery && ` matching "${searchQuery}"`}
             </p>
           </div>
 
           {/* DAO Grid */}
           {filteredDAOs.length === 0 ? (
-            <Card className="text-center py-20">
-              <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-gray-600" />
+            <Card variant="luxury" className="text-center py-20">
+              <div className="w-16 h-16 rounded-none bg-luxury-dark-800 border-4 border-blood-red-500 flex items-center justify-center mx-auto mb-4">
+                <Search className="w-8 h-8 text-blood-red-500" />
               </div>
-              <h3 className="text-xl font-bold mb-2">No DAOs Found</h3>
+              <h3 className="text-xl font-bold mb-2 uppercase tracking-wider">No DAOs Found</h3>
               <p className="text-gray-400 mb-6">
                 Try adjusting your search or filters
               </p>
               <Button
-                variant="secondary"
+                variant="primary"
                 onClick={() => {
                   setSearchQuery('');
                   setSelectedTags([]);
@@ -208,18 +208,18 @@ export default function ExplorePage() {
                       {/* Header */}
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-cyan via-cyber-purple to-cyber-pink flex items-center justify-center">
-                            <Flame className="w-6 h-6 text-white" />
+                          <div className="w-12 h-12 rounded-none bg-luxury-dark-800 border-4 border-blood-red-500 flex items-center justify-center shadow-red-glow">
+                            <Flame className="w-6 h-6 text-gold-500" />
                           </div>
                           <div>
-                            <h3 className="font-bold text-lg">{dao.name}</h3>
+                            <h3 className="font-bold text-lg uppercase tracking-wider">{dao.name}</h3>
                             <p className="text-sm text-gray-400 font-mono">
                               {dao.tokenSymbol}
                             </p>
                           </div>
                         </div>
                         {isFavorite && (
-                          <Star className="w-5 h-5 fill-current text-yellow-400" />
+                          <Star className="w-5 h-5 fill-current text-gold-500" />
                         )}
                       </div>
 
@@ -233,7 +233,7 @@ export default function ExplorePage() {
                         {dao.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-gray-400"
+                            className="px-2 py-1 text-xs rounded-none bg-luxury-dark-800 border-2 border-luxury-gray-500 text-gray-400 uppercase tracking-wider font-bold"
                           >
                             {tag}
                           </span>
@@ -241,7 +241,7 @@ export default function ExplorePage() {
                       </div>
 
                       {/* Footer */}
-                      <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                      <div className="flex items-center justify-between pt-4 border-t-2 border-luxury-gray-500">
                         <Badge variant="info" size="sm">
                           {CHAIN_NAMES[dao.chain]}
                         </Badge>
@@ -269,15 +269,15 @@ export default function ExplorePage() {
             viewport={{ once: true }}
             className="mt-20"
           >
-            <Card className="text-center py-12 bg-gradient-to-br from-cyber-cyan/5 via-cyber-purple/5 to-cyber-pink/5">
-              <h2 className="text-3xl font-bold mb-4">
+            <Card className="text-center py-12 bg-gradient-to-br from-blood-red-500/10 via-gold-500/10 to-blood-red-500/10 border-2 border-luxury-gray-500">
+              <h2 className="text-3xl font-bold mb-4 uppercase tracking-wider">
                 Don't See Your DAO?
               </h2>
               <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
                 Create a custom dashboard for any DAO in minutes. No coding required.
               </p>
               <Link href="/create">
-                <Button size="lg" icon={<Plus className="w-5 h-5" />}>
+                <Button variant="gold" size="lg" icon={<Plus className="w-5 h-5" />}>
                   Create Custom Dashboard
                 </Button>
               </Link>
