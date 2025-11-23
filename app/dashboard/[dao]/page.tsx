@@ -9,6 +9,12 @@ export function generateStaticParams() {
 }
 
 // Server component that wraps the client component
-export default function DashboardPage({ params }: { params: { dao: string } }) {
-  return <DashboardClient daoId={params.dao} />;
+// ✅ Make it async and await params
+export default async function DashboardPage({ 
+  params 
+}: { 
+  params: Promise<{ dao: string }> 
+}) {
+  const { dao } = await params;
+  return <DashboardClient daoId={dao} />;
 }
