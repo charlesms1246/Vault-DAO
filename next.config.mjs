@@ -20,13 +20,17 @@ const nextConfig = {
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
     
     // Fix for @metamask/sdk React Native dependencies
-    if (!isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        '@react-native-async-storage/async-storage': false,
-        'react-native': false,
-      };
-    }
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@react-native-async-storage/async-storage': false,
+      'react-native': false,
+    };
+
+    // Suppress the warnings
+    config.ignoreWarnings = [
+      { module: /node_modules\/@metamask\/sdk/ },
+      /Critical dependency: the request of a dependency is an expression/,
+    ];
     
     return config;
   },
