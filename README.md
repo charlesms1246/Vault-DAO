@@ -144,28 +144,6 @@ pinme upload ./out
 
 ---
 
-## 🖼️ Screenshots
-
-### Explore Page - Browse All 7 DAOs
-
-![Explore DAOs](https://placeholder-for-explore-screenshot.png)
-
-*Browse featured DAOs across Ethereum, Arbitrum, and Optimism with advanced filtering by category*
-
-### Dashboard - Lido DAO Treasury Analytics
-
-![Lido Dashboard](https://placeholder-for-lido-dashboard.png)
-
-*Real-time treasury tracking, asset breakdown, and governance insights for Lido DAO*
-
-### Dashboard - ApeCoin DAO Governance
-
-![ApeCoin Governance](https://placeholder-for-apecoin-governance.png)
-
-*Snapshot integration showing active proposals and voting analytics*
-
----
-
 ## 📖 Documentation
 
 ### Environment Variables
