@@ -358,6 +358,7 @@ MIT License - see [LICENSE](LICENSE) for details
 - **Snapshot** - For governance infrastructure
 - **RainbowKit** - For beautiful wallet connection UX
 - **Next.js Team** - For an incredible framework
+- **Francis Roger** - For the boilerplate
 
 ---
 
